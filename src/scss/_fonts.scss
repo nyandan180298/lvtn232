@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Inter-bold';
+    font-style: normal;
+    src: local('Inter Bold'), local('Inter-Bold'),
+        url('../assets/fonts/Inter/Inter-Bold.otf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter-regular';
+    font-style: normal;
+    src: local('Inter Regular'), local('Inter-Regular'),
+        url('../assets/fonts/Inter/Inter-Regular.otf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter-medium';
+    font-style: normal;
+    src: local('Inter Medium'), local('Inter-Medium'),
+        url('../assets/fonts/Inter/Inter-Medium.otf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter-semibold';
+    font-style: normal;
+    src: local('Inter SemiBold'), local('Inter-SemiBold'),
+        url('../assets/fonts/Inter/Inter-SemiBold.otf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter-light';
+    font-style: normal;
+    src: local('Inter Light'), local('Inter-Light'),
+        url('../assets/fonts/Inter/Inter-Light.otf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins-Regular';
+    font-style: normal;
+    src: local('Poppins Regular'), local('Poppins-Regular'),
+        url('../assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+$font-regular: 'Inter-regular';
+$font-semibold: 'Inter-semibold';
+$font-bold: 'Inter-bold';
+$font-light: 'Inter-light';
+$font-medium: 'Inter-medium';
+$font-poppins-regular: 'Poppins-regular';

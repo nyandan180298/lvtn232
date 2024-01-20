@@ -1,0 +1,35 @@
+@mixin font-14 {
+    font-size: 14px;
+    line-height: 24px;
+}
+
+@mixin font-16 {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+@mixin font-18 {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+@mixin font-12 {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+@mixin overflow-long-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin font-24 {
+    font-size: 24px;
+    line-height: 36px;
+}
+
+@mixin font-32 {
+    font-size: 32px;
+    line-height: 48px;
+}

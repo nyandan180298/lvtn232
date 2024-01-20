@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    @include font-18;
+    color: $color--text_navbar;
+    background-color: #000;
+    text-align: center;
+    &-tabs {
+        padding: 8px;
+        width: 200px;
+        cursor: pointer;
+        margin: auto;
+        margin-left: 0px;
+        margin-right: 16px;
+    }
+    .focus {
+        border-bottom: 3px solid;
+        border-color: red;
+        color: red;
+    }
+}

@@ -1,0 +1,18 @@
+
+.main-layout {
+  &__header {
+    display: flex;
+    background-color: bisque;
+    justify-content: space-around;
+    &-inner {
+      padding: 12px;
+      cursor: pointer;
+    }
+  }
+}
+.ant-input-affix-wrapper {
+  @include font12;
+  .ant-input {
+    @include font12;
+  }
+}

@@ -1,0 +1,73 @@
+$color--light: #ffffff;
+$color--light_10: rgba(
+    $color: $color--light,
+    $alpha: 0.1,
+);
+$color--light_15: rgba(
+    $color: $color--light,
+    $alpha: 0.15,
+);
+$color--light_20: rgba(
+    $color: $color--light,
+    $alpha: 0.2,
+);
+$color--light_25: rgba(
+    $color: $color--light,
+    $alpha: 0.25,
+);
+$color--light_50: rgba(
+    $color: $color--light,
+    $alpha: 0.5,
+);
+
+$color--text1: #111111;
+$color--text1_05: rgba(
+    $color: $color--text1,
+    $alpha: 0.05,
+);
+$color--text1_08: rgba(
+    $color: $color--text1,
+    $alpha: 0.08,
+);
+$color--text1_70: rgba(
+    $color: $color--text1,
+    $alpha: 0.7,
+);
+$color--text1_80: rgba(
+    $color: $color--text1,
+    $alpha: 0.8,
+);
+
+$color--text2: #686868;
+
+$color--text3: red;
+
+$color--text_navbar: #ffffff;
+
+$color--text_button: #2952E2;
+
+$color--text_active: #6bafeb;
+
+$color--button: #2778C4;
+
+$color--input: #f2f2f2;
+
+$color--active: #f17959;
+
+$color--collapse: #c6c6c6;
+
+$color--border: rgba(216, 216, 216, 1);
+
+$color--header: #ffffff;
+
+$color--left_menu: #f9f9f9;
+$color--left_menu_hover: rgba(0, 0, 0, 0.05);
+$color--left_menu_icon: #686868;
+$color--left_menu_icon_hover: #111111;
+
+
+$color--detail_header_save: rgba(241, 121, 89, 1);
+
+$color--tag: #f2f2f2;
+
+$color--reset: #ff5f73;

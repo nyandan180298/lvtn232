@@ -1,0 +1,59 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    padding: 10px;
+    background-color: $color--header;
+    &-icon-container {
+        display: flex;
+        .header-logo {
+            cursor: pointer;
+            margin: auto;
+            margin-left: 16px;
+            margin-right: 8px;
+        }
+        .header-logo-text {
+            cursor: pointer;
+            margin: auto;
+            margin-left: 16px;
+            margin-right: 8px;
+        }
+    }
+
+    &-middle-container {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        padding: 8px;
+        line-height: 42px;
+        .staff-name {
+            flex-grow: 1;
+        }
+        .staff-position {
+            flex-grow: 1;
+        }
+    }
+    &-button-container {
+        display: flex;
+        justify-items: center;
+        padding: 8px;
+    }
+    &-support-button {
+        @include font-24;
+        align-content: flex-end;
+        color: $color--text_button;
+        cursor: pointer;
+        margin: auto;
+        margin-left: 16px;
+        margin-right: 8px;
+    }
+    &-logout-button {
+        @include font-24;
+        align-self: flex-end;
+        color: $color--text_button;
+        cursor: pointer;
+        margin: auto;
+        margin-left: 16px;
+        margin-right: 8px;
+    }
+}
