@@ -28,7 +28,7 @@ export type FetchMethod =
 
 export type HandleErrorType = (res: any, config?: any) => boolean;
 
-const ROOT_API = 'http://13.215.104.66:13001';
+const ROOT_API = 'http://localhost:3001';
 
 const _commonErrorHandler = (response: IResponse, options: any) => {
     switch (response.errorCode) {

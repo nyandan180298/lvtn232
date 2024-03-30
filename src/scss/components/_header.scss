@@ -41,7 +41,7 @@
     &-support-button {
         @include font-24;
         align-content: flex-end;
-        color: $color--text_button;
+        color: $color--button-blue;
         cursor: pointer;
         margin: auto;
         margin-left: 16px;
@@ -50,7 +50,7 @@
     &-logout-button {
         @include font-24;
         align-self: flex-end;
-        color: $color--text_button;
+        color: $color--button-blue;
         cursor: pointer;
         margin: auto;
         margin-left: 16px;

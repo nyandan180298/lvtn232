@@ -1,0 +1,78 @@
+.pagination-container {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.record-displayer {
+    height: 100%;
+    width: 30%;
+    padding-left: 16px;
+    line-height: 40px;
+}
+
+.record-displayer-title {
+    color: $color--black;
+}
+
+.pagination-space {
+    width: 40%;
+}
+
+.page-controller {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+
+    .pagination-input {
+        width: 24px;
+        height: 24px;
+        background: $color--white-bg;
+        border: 1px solid $color--border;
+        border-radius: 4px;
+        margin-right: 8px;
+        text-align: center;
+        line-height: 100%;
+    }
+    .pagination-input:hover {
+        border: 0.8px solid $color--grey;
+    }
+    .pagination-input:focus-visible {
+        outline: none;
+        border: 0.8px solid $color--button;
+    }
+
+    .arrowUnavailable {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 8px;
+        gap: 10px;
+        width: 16px;
+        height: 16px;
+        stroke: $color--arrow_unavailable;
+    }
+    .arrowAvailable {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 8px;
+        gap: 10px;
+        width: 16px;
+        height: 16px;
+        stroke: $color--arrow_available;
+        cursor: pointer;
+    }
+    .arrowAvailable:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+    }
+}

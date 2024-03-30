@@ -24,7 +24,7 @@ const prepareData = (response: any): any => {
 };
 
 class ApiBase {
-    private _baseUrl = 'http://13.215.104.66:16001';
+    private _baseUrl = 'http://localhost:3001';
 
     get(url: string, options: any = {}) {
         return this.call(url, {

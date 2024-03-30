@@ -1,101 +1,101 @@
-import { EditOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import Table from 'components/Table/Table';
-import moment from 'moment';
-import { memo, useMemo } from 'react';
+import { EditOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import Table from "components/Table/Table";
+import moment from "moment";
+import { memo, useMemo } from "react";
+import SearchBar from "./SearchBar/SearchBar";
+import Pagination from "components/Pagination";
 
-const Inner = memo(({ data }) => {
-    const formatNgayNhapHang = (_, text) => {
-        return (
-            <p>
-                {text.createdAt &&
-                    moment(text.createdAt.substring(0, 10)).format(
-                        'DD/MM/YYYY'
-                    )}
-            </p>
-        );
-    };
-    const setKey = (text) => {
-        return text.uid;
-    };
+const Inner = memo(({ data, onPaginate, pageObj }) => {
+  const formatNgayNhapHang = (text) => {
+    return <p>{text && moment(text).format("DD/MM/YYYY")}</p>;
+  };
 
-    const editInfoFormat = (_, text) => {
-        return (
-            <Button className="edit-button" onClick={() => {}}>
-                <EditOutlined style={{ color: 'red' }} />
-            </Button>
-        );
-    };
+  const setKey = (text) => {
+    return text.uid;
+  };
 
-    const columns = useMemo(
-        () => [
-            {
-                title: 'Mã sản phẩm',
-                dataIndex: 'maSP',
-                key: 'maSP',
-            },
-            {
-                title: 'Tên sản phẩm',
-                dataIndex: 'tenSP',
-                key: 'tenSP',
-            },
-            {
-                title: 'Giá nhập',
-                dataIndex: 'giaNhap',
-                key: 'giaNhap',
-            },
-            {
-                title: 'Số lượng',
-                dataIndex: 'sLuong',
-                key: 'sLuong',
-            },
-            {
-                title: 'Nguồn nhập',
-                dataIndex: 'nguon',
-                key: 'nguon',
-            },
-            {
-                title: 'Ngày nhập kho',
-                dataIndex: 'ngayNhap',
-                key: 'ngayNhap',
-                render: formatNgayNhapHang,
-            },
-            {
-                title: '',
-                dataIndex: '',
-                key: 'action',
-                render: editInfoFormat,
-            },
-        ],
-        []
-    );
-
+  const editInfoFormat = () => {
     return (
-        <div className="table-container">
-            <div>
-                <div className="search-add">
-                    <Button className="add-patient-button" onClick={() => {}}>
-                        {/* <Add />
-                        Thêm bệnh nhân */}
-                    </Button>
-                </div>
-                <Table
-                    className="item-list"
-                    columns={columns}
-                    data={''}
-                    rowKey={setKey}
-                />
-            </div>
-            {/* <Pagination
-                title={'Bệnh nhân'}
-                pageSize={data && data.pageSize}
-                totalRow={data && data.totalRows}
-                currentPage={data && data.currentPage}
-                totalPage={data && data.totalPages}
-                onPaginate={onPaginate}
-            /> */}
-        </div>
+      <Button className="edit-button" onClick={() => {}}>
+        <EditOutlined style={{ color: "red" }} />
+      </Button>
     );
+  };
+
+  const columns = useMemo(
+    () => [
+      {
+        title: "Mã sản phẩm",
+        dataIndex: "pId",
+        key: "pId",
+      },
+      {
+        title: "Tên sản phẩm",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Giá nhập",
+        dataIndex: "price",
+        key: "price",
+      },
+      {
+        title: "Số lượng",
+        dataIndex: "quantity",
+        key: "quantity",
+      },
+      {
+        title: "Nguồn nhập",
+        dataIndex: "nguonNhap",
+        key: "nguonNhap",
+      },
+      {
+        title: "Ngày nhập kho",
+        dataIndex: "ngayNhap",
+        key: "ngayNhap",
+        render: (date) => formatNgayNhapHang(date),
+      },
+      {
+        title: "",
+        dataIndex: "",
+        key: "action",
+        render: editInfoFormat,
+      },
+    ],
+    []
+  );
+
+  return (
+    <div className="table-container">
+      <div>
+        <div className="search-add-bar">
+          <div className="search-div">
+            <SearchBar />
+          </div>
+          <div className="add-div">
+            <Button className="add-product-button" onClick={() => {}}>
+              {/* <Add />
+                        Thêm bệnh nhân */}
+            </Button>
+          </div>
+        </div>
+        <Table
+          columns={columns}
+          data={data}
+          rowKey={setKey}
+        />
+      </div>
+      <Pagination
+        title={"Sản Phẩm"}
+        pageSize={8}
+        totalRow={pageObj && pageObj.total}
+        currentPage={pageObj && pageObj.page}
+        totalPage={pageObj && pageObj.totalPage}
+        onPaginate={onPaginate}
+      />
+    </div>
+  );
 });
 
 export default Inner;
