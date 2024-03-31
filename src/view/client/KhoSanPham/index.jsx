@@ -26,9 +26,10 @@ const Wrapper = memo(() => {
   const getAll = useCallback(async (body, options) => {
     const param = { params: options };
     const res = await productService.getAll(body, param);
+
     if (res.isSuccess) {
       Promise.all(
-        res.data.map(async (value) => {
+        res.data.data.map(async (value) => {
           if (value.nguonNhap) {
             const nn = await fetch(`${NGUON_NHAP_URL}/get/${value.nguonNhap}`);
             const resNn = await nn.json();
@@ -41,9 +42,9 @@ const Wrapper = memo(() => {
         .catch((error) => console.error(error));
     } else return;
     setPageObj({
-      page: res.page,
-      total: res.total,
-      totalPage: res.totalPage,
+      page: res.data.page,
+      total: res.data.total,
+      totalPage: res.data.totalPage,
     });
   }, []);
 

@@ -8,9 +8,6 @@ export interface IResponse {
     errorCode?: number;
     message?: string;
     data?: any;
-    total?: number;
-    page?: number;
-    totalPage?: number;
 }
 
 class ResponseModel implements IResponse {
@@ -18,9 +15,6 @@ class ResponseModel implements IResponse {
     errorCode = 0;
     message = '';
     data = null;
-    total = 0;
-    page = 0;
-    totalPage= 0;
 }
 
 const prepareResponse = (response: any): any => {
@@ -47,9 +41,6 @@ export const getResponse = (
     response.errorCode = responseBody?.error_code || 0;
     response.message = responseBody?.message || '';
     response.data = prepareResponse(responseBody?.data);
-    response.page = responseBody?.page;
-    response.total = responseBody?.total;
-    response.totalPage = responseBody?.totalPage;
     if (error) {
         response.message = String(error);
     }

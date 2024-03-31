@@ -36,7 +36,7 @@ const routes = [
         }),
     },
     {
-        name: 'Login',
+        name: 'Register',
         path: routeConstants.REGISTER,
         Component: Loadable({
             loading: LoadingScreen,
@@ -50,9 +50,16 @@ const routes = [
             loading: LoadingScreen,
             loader: () => import('view/client/MainLayout'),
         }),
-        authorization: false,
-        // redirect: routeConstants.HOME,
+        authorization: true,
         childRoutes: [
+            {
+                name: 'Logout',
+                path: routeConstants.LOGOUT,
+                Component: Loadable({
+                    loading: LoadingScreen,
+                    loader: () => import('view/Logout'),
+                }),
+            },
             {
                 name: 'KhoSanPham',
                 path: routeConstants.KHOSANPHAM,
