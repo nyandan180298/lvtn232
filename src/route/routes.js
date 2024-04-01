@@ -53,6 +53,14 @@ const routes = [
         authorization: true,
         childRoutes: [
             {
+                name: 'KhoSanPham',
+                path: routeConstants.KHOSANPHAM,
+                Component: Loadable({
+                    loading: LoadingScreen,
+                    loader: () => import('view/client/ChonKho'),
+                }),
+            },
+            {
                 name: 'Logout',
                 path: routeConstants.LOGOUT,
                 Component: Loadable({
@@ -61,8 +69,8 @@ const routes = [
                 }),
             },
             {
-                name: 'KhoSanPham',
-                path: routeConstants.KHOSANPHAM,
+                name: 'KhoSanPham_Detail',
+                path: routeConstants.KHOSANPHAM_DETAIL,
                 Component: Loadable({
                     loading: LoadingScreen,
                     loader: () => import('view/client/KhoSanPham'),

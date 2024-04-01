@@ -15,7 +15,7 @@ class ProductService extends ApiBase {
 
   getAll = (requestBody, options) => {
     const url = `${_PRODUCT_PATH}/getAll`;
-    return this.get(url, requestBody, options);
+    return this.post(url, requestBody, options);
   };
 
   update = (requestBody) => {

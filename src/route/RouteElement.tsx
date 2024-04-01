@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { setToken, useToken } from 'reducers/token/function';
 import userService from 'services/userService';
 import routeConstants from './routeConstant';
+import { setKho } from 'reducers/kho/function';
 
 interface IProps {
     children: ReactComponentElement<any>;
@@ -22,6 +23,7 @@ const RouteElement: FC<IProps> = memo(
                 if (token) {
                     userService.me().then((res: IResponse) => {
                         if (res.isSuccess) {
+                            setKho(res.data.kho)
                             setAuthorized(true);
                         } else {
                             setToken('');

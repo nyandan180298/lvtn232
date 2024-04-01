@@ -41,6 +41,11 @@ const Inner = memo(({ data, onPaginate, pageObj }) => {
         key: "price",
       },
       {
+        title: "Loại Hàng",
+        dataIndex: "category",
+        key: "category",
+      },
+      {
         title: "Số lượng",
         dataIndex: "quantity",
         key: "quantity",
@@ -88,7 +93,7 @@ const Inner = memo(({ data, onPaginate, pageObj }) => {
       </div>
       <Pagination
         title={"Sản Phẩm"}
-        pageSize={8}
+        pageSize={5}
         totalRow={pageObj && pageObj.total}
         currentPage={pageObj && pageObj.page}
         totalPage={pageObj && pageObj.totalPage}

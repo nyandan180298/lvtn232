@@ -1,59 +1,76 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px;
+  background-color: $color--header;
+  @include font-18;
+  &-icon-container {
     display: flex;
-    justify-content: space-between;
-    height: 100px;
-    padding: 10px;
-    background-color: $color--header;
-    &-icon-container {
-        display: flex;
-        .header-logo {
-            cursor: pointer;
-            margin: auto;
-            margin-left: 16px;
-            margin-right: 8px;
-        }
-        .header-logo-text {
-            cursor: pointer;
-            margin: auto;
-            margin-left: 16px;
-            margin-right: 8px;
-        }
+    .header-logo {
+      cursor: pointer;
+      margin: auto;
+      margin-left: 16px;
+      margin-right: 8px;
     }
+    .header-logo-text {
+      cursor: pointer;
+      margin: auto;
+      margin-left: 16px;
+      margin-right: 8px;
+    }
+  }
 
-    &-middle-container {
-        display: flex;
-        flex-direction: column;
-        justify-items: center;
-        padding: 8px;
-        line-height: 42px;
-        .staff-name {
-            flex-grow: 1;
-        }
-        .staff-position {
-            flex-grow: 1;
-        }
+  &-middle-container {
+    @include font-18;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 8px;
+    line-height: 42px;
+    border-radius: 10px;
+    background-color: $color--header-button;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    .staff-name {
+      flex-grow: 1;
     }
-    &-button-container {
-        display: flex;
-        justify-items: center;
-        padding: 8px;
+    .staff-position {
+      flex-grow: 1;
     }
-    &-support-button {
-        @include font-24;
-        align-content: flex-end;
-        color: $color--button-blue;
-        cursor: pointer;
-        margin: auto;
-        margin-left: 16px;
-        margin-right: 8px;
-    }
-    &-logout-button {
-        @include font-24;
-        align-self: flex-end;
-        color: $color--button-blue;
-        cursor: pointer;
-        margin: auto;
-        margin-left: 16px;
-        margin-right: 8px;
-    }
+  }
+  &-button-container {
+    display: flex;
+    justify-items: center;
+    padding: 8px;
+  }
+  &-support-button {
+    @include font-18;
+    padding: 12px;
+    align-content: flex-end;
+    cursor: pointer;
+    margin: auto;
+    margin-left: 16px;
+    margin-right: 8px;
+    background-color: $color--header-button;
+    border-radius: 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  }
+  &-logout-button {
+    @include font-18;
+    padding: 12px;
+    align-self: flex-end;
+    cursor: pointer;
+    margin: auto;
+    margin-left: 16px;
+    margin-right: 8px;
+    background-color: $color--header-button;
+    border-radius: 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  }
 }

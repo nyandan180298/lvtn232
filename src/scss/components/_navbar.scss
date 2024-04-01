@@ -14,7 +14,7 @@
     }
     .focus {
         border-bottom: 3px solid;
-        border-color: red;
-        color: red;
+        border-color: $color--text-navbar-focus ;
+        color: $color--text-navbar-focus;
     }
 }

@@ -48,7 +48,7 @@ const Inner = memo(({ handleLogin }) => {
         }).then((data) => {
             if (data.isSuccess) {
                 Message.sendSuccess('Đăng nhập thành công');
-                navigate('/', { replace: true });
+                navigate('/chonkho', { replace: true });
             } else {
                 if (
                     data.message === errorMessages.WITHOUT_CHARACTER_ERROR ||
