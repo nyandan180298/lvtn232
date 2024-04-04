@@ -2,22 +2,64 @@ import { EditOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import Table from "components/Table/Table";
 import moment from "moment";
-import { memo, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import Pagination from "components/Pagination";
+import { DEFAULT_PAGE_SIZE, DEFAULT_URL } from "utils/constants";
+import AddProduct from "components/AddProduct";
+import Add from "assets/AddIcon";
 
-const Inner = memo(({ data, onPaginate, pageObj }) => {
-  const formatNgayNhapHang = (text) => {
-    return <p>{text && moment(text).format("DD/MM/YYYY")}</p>;
-  };
+const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
+const _NGUON_NHAP_URL = `${DEFAULT_URL}/nguon-nhap`;
+
+const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
+  const [addModalVisible, setAddModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [nn, setNn] = useState([]);
+
+  const getCategories = useCallback(async () => {
+    const ctg = await fetch(`${_DANH_MUC_URL}/getAll`);
+    const resCtg = await ctg.json();
+    if (resCtg) setCategories(resCtg.data);
+  }, []);
+
+  const getNn = useCallback(async () => {
+    const nn = await fetch(`${_NGUON_NHAP_URL}/getAll`);
+    const resNn = await nn.json();
+    if (resNn) setNn(resNn.data);
+  }, []);
+
+  const [pid, setPid] = useState("");
+
+  useEffect(() => {
+    getCategories();
+    getNn();
+  }, [getCategories, getNn]);
+
+  const handleCloseAdd = useCallback(() => {
+    handleRerender();
+    setAddModalVisible(false);
+  }, [handleRerender]);
+
+  const handleCloseEdit = useCallback(() => {
+    handleRerender();
+    setEditModalVisible(false);
+  }, [handleRerender]);
 
   const setKey = (text) => {
     return text.uid;
   };
 
-  const editInfoFormat = () => {
+  const editInfoFormat = (_, text) => {
     return (
-      <Button className="edit-button" onClick={() => {}}>
+      <Button
+        className="edit-button"
+        onClick={() => {
+          setPid(text.pId);
+          setEditModalVisible(true);
+        }}
+      >
         <EditOutlined style={{ color: "red" }} />
       </Button>
     );
@@ -71,6 +113,10 @@ const Inner = memo(({ data, onPaginate, pageObj }) => {
     []
   );
 
+  const formatNgayNhapHang = (text) => {
+    return <p>{text && moment(text).format("DD/MM/YYYY")}</p>;
+  };
+
   return (
     <div className="table-container">
       <div>
@@ -79,21 +125,41 @@ const Inner = memo(({ data, onPaginate, pageObj }) => {
             <SearchBar />
           </div>
           <div className="add-div">
-            <Button className="add-product-button" onClick={() => {}}>
-              {/* <Add />
-                        Thêm bệnh nhân */}
+            <Button
+              className="add-button"
+              onClick={() => setAddModalVisible(true)}
+            >
+              <Add />
+              Thêm Sản Phẩm
             </Button>
           </div>
+          {addModalVisible && (
+            <AddProduct
+              onClose={handleCloseAdd}
+              isModalVisible={addModalVisible}
+              type="add"
+              khoid={khoId}
+              categories={categories}
+              nNs={nn}
+            />
+          )}
+          {editModalVisible && (
+            <AddProduct
+              onClose={handleCloseEdit}
+              isModalVisible={editModalVisible}
+              type="edit"
+              khoid={khoId}
+              categories={categories}
+              nNs={nn}
+              pid={pid}
+            />
+          )}
         </div>
-        <Table
-          columns={columns}
-          data={data}
-          rowKey={setKey}
-        />
+        <Table columns={columns} data={data} rowKey={setKey} />
       </div>
       <Pagination
         title={"Sản Phẩm"}
-        pageSize={5}
+        pageSize={DEFAULT_PAGE_SIZE}
         totalRow={pageObj && pageObj.total}
         currentPage={pageObj && pageObj.page}
         totalPage={pageObj && pageObj.totalPage}

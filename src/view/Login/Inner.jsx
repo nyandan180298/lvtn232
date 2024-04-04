@@ -12,7 +12,7 @@ import LoginPicture from 'assets/LoginPicture';
 const errorMessages = {
     WITHOUT_NUMBER_ERROR: 'Field password must contain number',
     WITHOUT_CHARACTER_ERROR: 'Field password entirely numeric',
-    WRONG_INPUT_ERROR: 'Your username or password is not correct!',
+    WRONG_INPUT_ERROR: 'Tên đăng nhập hoặc mật khẩu sai!',
     USERNAME_REQUIRED_ERROR: 'Field username is required',
     PASSWORD_REQUIRED_ERROR: 'Field password is required',
 };
@@ -48,7 +48,6 @@ const Inner = memo(({ handleLogin }) => {
         }).then((data) => {
             if (data.isSuccess) {
                 Message.sendSuccess('Đăng nhập thành công');
-                navigate('/chonkho', { replace: true });
             } else {
                 if (
                     data.message === errorMessages.WITHOUT_CHARACTER_ERROR ||
@@ -72,7 +71,7 @@ const Inner = memo(({ handleLogin }) => {
                 }
             }
         });
-    }, [handleLogin, navigate, password, username]);
+    }, [handleLogin, password, username]);
 
     const options = useMemo(
         () => [

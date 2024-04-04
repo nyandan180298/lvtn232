@@ -2,13 +2,20 @@ import { memo, useCallback, useEffect, useState } from "react";
 import Inner from "./Inner";
 import productService from "services/productService";
 import { useParams, useSearchParams } from "react-router-dom";
+import { DEFAULT_URL } from "utils/constants";
 
-const NGUON_NHAP_URL = "http://localhost:3001/nguon-nhap";
-const _DANH_MUC_URL = "http://localhost:3001/category";
+const NGUON_NHAP_URL = `${DEFAULT_URL}/nguon-nhap`;
+const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
 
 const Wrapper = memo(() => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [rerender, setRerender] = useState(false);
+
+  const handleRerender = useCallback(() => {
+    setRerender(!rerender);
+  }, [rerender]);
+
   const [data, setData] = useState([]);
 
   const [pageObj, setPageObj] = useState({
@@ -71,10 +78,18 @@ const Wrapper = memo(() => {
   useEffect(() => {
     const object = Object.fromEntries(searchParams.entries());
     getAll({ khoid: id }, object);
-  }, [getAll, searchParams, id]);
+  }, [getAll, searchParams, id, rerender]);
 
   return (
-    data && <Inner data={data} onPaginate={onPaginate} pageObj={pageObj} />
+    data && (
+      <Inner
+        data={data}
+        onPaginate={onPaginate}
+        pageObj={pageObj}
+        handleRerender={handleRerender}
+        khoId={id}
+      />
+    )
   );
 });
 Wrapper.displayName = "KhoSanPham";

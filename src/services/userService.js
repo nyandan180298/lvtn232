@@ -59,4 +59,6 @@ class UserService extends ApiBase {
         return this.post(url);
     };
 }
+
+// eslint-disable-next-line
 export default new UserService();

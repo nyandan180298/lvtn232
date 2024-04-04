@@ -5,7 +5,7 @@
     @include font-12;
     .ant-table-thead {
       .ant-table-cell {
-        background-color: #CCCCCC;
+        background-color: #cccccc;
       }
     }
     .ant-table-cell {
@@ -31,9 +31,25 @@
     }
   }
   .add-div {
+    padding: 16px;
     display: flex;
-    flex-grow: 1;
+    justify-content: space-between;
     align-items: center;
+    .add-button {
+      outline: none;
+      border: none;
+      overflow: hidden;
+      background-color: $color--add-button;
+      color: $color--light;
+      padding: 4px 12px 4px 4px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: $font-regular, sans-serif;
+    }
   }
   .search-button {
     padding: 0 8px 0 0;

@@ -24,4 +24,5 @@ class ProductService extends ApiBase {
   };
 }
 
+// eslint-disable-next-line
 export default new ProductService();

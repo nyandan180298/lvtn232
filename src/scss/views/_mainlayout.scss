@@ -1,4 +1,5 @@
 .main-layout {
+  white-space: nowrap;
   &__header {
     display: flex;
     background-color: bisque;
@@ -18,21 +19,64 @@
 
 .chon-kho-layout {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 800px;
   padding: 20px;
+}
+
+.chon-kho-container {
+  display: flex;
+  flex-direction: column;
   .kho-pickem {
-    margin: 50px;
-    padding: 20px;
-    display: grid;
+    margin: 16px;
+    padding: 16px;
+    display: flex;
     border-radius: 1rem;
     cursor: pointer;
-    background-color: $color--header-button;
+    background-color: $color--white-bg;
     height: fit-content;
-    .kho-pickem-row{
-      height: 40px;
-      line-height: 40px;
-      padding: 10px
+    border-radius: 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    .kho-pickem-row {
+      height: 32px;
+      line-height: 32px;
+      padding-left: 8px;
+    }
+    .kho-id {
+      padding-right: 8px;
+      border-right: $color--navbar solid 2px;
+    }
+  }
+  .kho-pickem:hover {
+    background-color: #fff;
+  }
+}
+.add-kho-container {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 15px;
+  height: 50px;
+  .add-div {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .add-button {
+      outline: none;
+      border: none;
+      overflow: hidden;
+      background-color: $color--add-button;
+      color: $color--light;
+      padding: 4px 12px 4px 4px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: $font-regular, sans-serif;
     }
   }
 }

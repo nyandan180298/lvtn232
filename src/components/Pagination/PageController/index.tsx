@@ -27,7 +27,7 @@ const PageController: FC<IPageControllerProps> = memo(
         );
 
         useEffect(() => {
-            if (currentPage?.toString() === '1') {
+            if (currentPage?.toString() === '1' || currentPage?.toString() === '0') {
                 setArrowStateLeft(arrowStateConst.UNAVAILABLE);
             } else {
                 setArrowStateLeft(arrowStateConst.AVAILABLE);

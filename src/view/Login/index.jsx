@@ -10,7 +10,7 @@ const Wrapper = memo(props => {
     useEffect(() => {
         const token = getToken();
         if (token) {
-            navigate(routeConstants.MAIN, { replace: true });
+            navigate(routeConstants.KHOSANPHAM, { replace: true });
         }
     }, [navigate]);
     const handleLogin = useCallback(
@@ -18,7 +18,7 @@ const Wrapper = memo(props => {
             const login = await UserService.login(data);
             if (login.isSuccess) {
                 setToken(login.data.token.accessToken);
-                navigate(routeConstants.MAIN);
+                navigate(routeConstants.KHOSANPHAM);
             }
             return login;
         },
