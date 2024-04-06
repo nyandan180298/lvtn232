@@ -34,6 +34,7 @@ const AddKho: FC<IKhoModalProps> = ({
         addKhoService(data, uid).then((res) => {
           if (res.isSuccess) {
             Message.sendSuccess("Thêm kho thành công!");
+            window.location.reload();
             handleRerender?.();
             onClose();
           } else Message.sendError(`Thêm kho thất bại: ${res.message}`);
@@ -43,6 +44,7 @@ const AddKho: FC<IKhoModalProps> = ({
           editKhoService(data, uid).then((res) => {
             if (res.isSuccess) {
               Message.sendSuccess("Chỉnh sửa thông tin thành công!");
+              window.location.reload();
               handleRerender?.();
               onClose();
             } else

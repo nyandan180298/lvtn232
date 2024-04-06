@@ -17,6 +17,11 @@ class KhoService extends ApiBase {
     const url = `${_KHO_PATH}/update/${requestBody.id}`;
     return this.post(url, requestBody);
   };
+
+  remove = (id) => {
+    const url = `${_KHO_PATH}/delete/${id}`;
+    return this.delete(url);
+  };
 }
 
 // eslint-disable-next-line

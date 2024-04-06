@@ -24,10 +24,32 @@
   padding: 20px;
 }
 
+.kho-pickem-container{
+  display: flex;
+}
+
 .chon-kho-container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  .delete-button-container {
+    display: flex;
+    flex-grow: 4;
+    .delete-button {
+      align-self: center;
+      height: 36px;
+      background-color: $color--delete-button;
+      color: #fff;
+      line-height: 36px;
+      @include font-16;
+      border-radius: 10px;
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    }
+  }
   .kho-pickem {
+    width: 160px;
     margin: 16px;
     padding: 16px;
     display: flex;
@@ -39,6 +61,7 @@
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
       rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
       rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    flex-grow: 1;
     .kho-pickem-row {
       height: 32px;
       line-height: 32px;

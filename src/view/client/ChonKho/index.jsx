@@ -14,10 +14,6 @@ const Wrapper = memo(() => {
     setUid(res.data?.id);
   }, []);
 
-  useEffect(() => {
-    getUser();
-  }, [getUser, rerender]);
-
   const handleRerender = useCallback(() => {
     setRerender(!rerender);
   }, [rerender]);
@@ -35,8 +31,9 @@ const Wrapper = memo(() => {
   }, [setKhoData]);
 
   useEffect(() => {
+    getUser();
     getKhoDetail();
-  }, [getKhoDetail]);
+  }, [getUser, getKhoDetail, rerender]);
 
   return <Inner data={khoData} handleRerender={handleRerender} uid={uid} />;
 });
