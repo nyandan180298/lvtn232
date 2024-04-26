@@ -11,7 +11,6 @@ const Inner = memo(({ data, handleRerender, uid }) => {
   const navigate = useNavigate();
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
-  const [editModalVisible, setEditModalVisible] = useState(false);
   const [kid, setKid] = useState("");
 
   const handleCloseConfirm = useCallback(() => {
@@ -24,13 +23,8 @@ const Inner = memo(({ data, handleRerender, uid }) => {
     setAddModalVisible(false);
   }, [handleRerender]);
 
-  const handleCloseEdit = useCallback(() => {
-    handleRerender();
-    setEditModalVisible(false);
-  }, [handleRerender]);
 
   const handleDelete = useCallback(() => {
-    console.log(kid)
     deleteKhoService(kid).then((res) => {
       if (res.isSuccess) {
         Message.sendSuccess("Xóa kho thành công!");
@@ -61,15 +55,6 @@ const Inner = memo(({ data, handleRerender, uid }) => {
               uid={uid}
             />
           )}
-          {editModalVisible && (
-            <AddKho
-              onClose={handleCloseEdit}
-              isModalVisible={editModalVisible}
-              type="edit"
-              handleRerender={handleRerender}
-              uid={uid}
-            />
-          )}
           {confirmModalVisible && (
             <Modal
               title={"Xác nhận xóa kho"}
@@ -87,16 +72,19 @@ const Inner = memo(({ data, handleRerender, uid }) => {
       </div>
       <div className="chon-kho-container">
         {data &&
-          data.map((value) => {
+          data.map((value, i) => {
             return (
-              <div className="kho-pickem-container">
+              <div className="kho-pickem-container" key={i}>
                 <div
                   className="kho-pickem"
                   onClick={() => {
-                    navigate(`/khosanpham/${value.id}`);
+                    navigate(`/kho/${value.id}`);
+                    navigate(0)
                   }}
                 >
-                  <div className="kho-pickem-row kho-id">Mã: {value?.khoId}</div>
+                  <div className="kho-pickem-row kho-id">
+                    Mã: {value?.khoId}
+                  </div>
                   <div className="kho-pickem-row"> Tên: {value?.name}</div>
                 </div>
                 <div className="delete-button-container">

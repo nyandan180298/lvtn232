@@ -35,6 +35,7 @@ const Wrapper = memo(() => {
   const getAll = useCallback(async (body, options) => {
     const param = { params: options };
     const res = await productService.getAll(body, param);
+    if (!res.data) setData([]);
 
     if (res.isSuccess) {
       Promise.all(

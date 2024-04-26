@@ -8,9 +8,10 @@ import Pagination from "components/Pagination";
 import { DEFAULT_PAGE_SIZE, DEFAULT_URL } from "utils/constants";
 import AddProduct from "components/AddProduct";
 import Add from "assets/AddIcon";
+import khoService from "services/khoService";
 
 const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
-const _NGUON_NHAP_URL = `${DEFAULT_URL}/nguon-nhap`;
+const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
 
 const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   const [addModalVisible, setAddModalVisible] = useState(false);
@@ -25,10 +26,21 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   }, []);
 
   const getNn = useCallback(async () => {
-    const nn = await fetch(`${_NGUON_NHAP_URL}/getAll`);
-    const resNn = await nn.json();
-    if (resNn) setNn(resNn.data);
-  }, []);
+    const kho = await khoService.detail(khoId);
+    const nn = kho.data.nguonNhaps;
+    const arr = await Promise.all(
+      nn.map(async (value) => {
+        const nguon_nhap = await fetch(`${_NN_URL}/get/${value}`);
+        const resNguon_nhap = await nguon_nhap.json();
+        return {
+          _id: resNguon_nhap.data._id,
+          name: resNguon_nhap.data.name,
+          phone_num: resNguon_nhap.data.phone_num,
+        };
+      })
+    );
+    if (arr) setNn(arr);
+  }, [khoId]);
 
   const [pid, setPid] = useState("");
 
@@ -48,7 +60,7 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   }, [handleRerender]);
 
   const setKey = (text) => {
-    return text.uid;
+    return text.pId;
   };
 
   const editInfoFormat = (_, text) => {

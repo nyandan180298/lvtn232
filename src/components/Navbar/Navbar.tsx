@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = memo(() => {
   const navigate = useNavigate();
   const handleClickHome = useCallback(() => {
-    navigate("/khosanpham");
+    navigate("/kho");
   }, [navigate]);
   return (
     <div className="navbar">

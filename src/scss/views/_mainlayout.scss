@@ -10,10 +10,49 @@
     }
   }
 }
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 10;
+  height: 100%;
+  .detail-left-container {
+    position: absolute;
+    background-color: $color--left_menu;
+    display: flex;
+    width: 330px;
+    flex-direction: column;
+    font-weight: 500;
+    transition: width 0.4s;
+    height: 100%;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    border-radius: 10px;
+    .ant-menu {
+      border-radius: 12px;
+      background-color: $color--left_menu;
+      .ant-menu-submenu-selected {
+        background-color: $color--left_menu;
+      }
+      .ant-menu-item-selected {
+        background-color: $color--left_menu;
+      }
+    }
+  }
+  .detail-right-container {
+    margin-left: 330px;
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 10;
+    transition: margin-left 0.4s;
+  }
+}
+
 .ant-input-affix-wrapper {
-  @include font12;
+  @include font-12;
   .ant-input {
-    @include font12;
+    @include font-12;
   }
 }
 
@@ -24,7 +63,7 @@
   padding: 20px;
 }
 
-.kho-pickem-container{
+.kho-pickem-container {
   display: flex;
 }
 
@@ -32,9 +71,12 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
   .delete-button-container {
     display: flex;
-    flex-grow: 4;
+    flex-direction: column;
+    flex-grow: 3;
+    justify-content: space-around;
     .delete-button {
       align-self: center;
       height: 36px;

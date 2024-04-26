@@ -1,13 +1,15 @@
 const routeConstants = {
     HOME:'/home',
     ABOUT:'/about',
+    REGISTER: '/register',
+    CONTACT: '/contact',
     LOGIN: '/login',
     LOGOUT: '/logout',
     MAIN: '/',
-    KHOSANPHAM: '/khosanpham',
-    KHOSANPHAM_DETAIL: '/khosanpham/:id',
-    REGISTER: '/register',
-    CONTACT: '/contact',
+    KHOSANPHAM: '/kho',
+    NGUONNHAP: '/nguon-nhap/:id',
+    KHOSANPHAM_DETAIL: '/kho/:id',
+    
 };
 
 export default routeConstants;

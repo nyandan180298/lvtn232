@@ -1,3 +1,8 @@
+$color--pallette_1: #f6f5f2;
+$color--pallette_2: #f0ebe3;
+$color--pallette_3: #f3d0d7;
+$color--pallette_4: #ffefef;
+
 $color--light: #ffffff;
 $color--light_50: rgba(
   $color: $color--light,
@@ -14,7 +19,7 @@ $color--grey: #686868;
 
 $color--red: red;
 
-$color--navbar: #333;
+$color--navbar: #444;
 
 $color--text-navbar: #ffffff;
 
@@ -36,14 +41,18 @@ $color--collapse: #c6c6c6;
 
 $color--border: rgba(216, 216, 216, 1);
 
-$color--header: #EFBC9B;
+$color--header: #ffefef;
 
 $color--arrow_available: #111111;
 
 $color--arrow_unavailable: #a6a6a6;
 
-$color--header-button: #FBF3D5;
+$color--header-button: $color--pallette_3;
 
-$color--header-button-text: #9CAFAA;
+$color--header-button-text: #fbf3d5;
 
-$color--delete-button: #ff0000
+$color--delete-button: #ff0000;
+
+$color--menu_header: $color--pallette_4;
+
+$color--left_menu: $color--pallette_3;

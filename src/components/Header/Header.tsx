@@ -9,11 +9,13 @@ interface IHeaderProps {
 const Header: FC<IHeaderProps> = memo(({ sname, spos }) => {
   const navigate = useNavigate();
   const handleClickHome = useCallback(() => {
-    navigate("/khosanpham");
+    navigate("/kho");
+    navigate(0)
   }, [navigate]);
 
   const handleClickLogout = useCallback(() => {
     navigate("/logout");
+    navigate(0)
   }, [navigate]);
 
   return (
@@ -27,7 +29,7 @@ const Header: FC<IHeaderProps> = memo(({ sname, spos }) => {
         </div>
       </div>
       <div className="header-middle-container">
-        {sname && <div className="staff-name"> Nhân viên: {sname} </div>}
+        {sname && <div className="staff-name"> Tên tài khoản: {sname} </div>}
         {spos && <div className="staff-position"> Chức vụ: {spos} </div>}
       </div>
       <div className="header-button-container">

@@ -197,8 +197,9 @@ const AddProduct: FC<IModalProps> = ({
                 }
                 placeholder="Thực phẩm"
                 className="input-item"
-                options={categories.map((value: any) => {
+                options={categories.map((value: any,index) => {
                   return {
+                    key: index,
                     value: value._id,
                     label: value.name,
                   };
@@ -219,8 +220,9 @@ const AddProduct: FC<IModalProps> = ({
                 }
                 placeholder="Nguồn Nhập"
                 className="input-item"
-                options={nNs.map((value: any) => {
+                options={nNs.map((value: any,index) => {
                   return {
+                    key: index,
                     value: value._id,
                     label: value.name,
                   };

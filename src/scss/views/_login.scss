@@ -53,7 +53,7 @@
     background-color: $color--white-bg;
     min-height: 40px;
     margin-top: 12px;
-    @include font14-20;
+    @include font-14;
     border: none;
     padding: 10px 16px;
     font-family: $font-regular, sans-serif;
@@ -64,7 +64,7 @@
     background-color: $color--white-bg;
     min-height: 40px;
     margin-top: 12px;
-    @include font14-20;
+    @include font-14;
     border: none;
     padding: 10px 16px;
     font-family: $font-regular, sans-serif;
@@ -75,7 +75,7 @@
     background-color: $color--white-bg;
     min-height: 40px;
     margin-top: 12px;
-    @include font14-20;
+    @include font-14;
     border: none;
     padding: 0;
     > input.ant-input {

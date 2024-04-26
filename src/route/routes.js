@@ -76,6 +76,14 @@ const routes = [
                     loader: () => import('view/client/KhoSanPham'),
                 }),
             },
+            {
+                name: 'NguonNhap',
+                path: routeConstants.NGUONNHAP,
+                Component: Loadable({
+                    loading: LoadingScreen,
+                    loader: () => import('view/client/NguonNhap'),
+                }),
+            },
         ],
     },
 ];

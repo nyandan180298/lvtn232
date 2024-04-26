@@ -1,5 +1,5 @@
 import Header from "components/Header/Header";
-import Navbar from "components/Navbar/Navbar";
+import LeftMenu from "components/LeftMenu";
 import { memo, useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import userService from "services/userService";
@@ -26,10 +26,13 @@ const Inner = memo(() => {
   return (
     <div className="main-layout">
       <Header sname={staffName} spos={pos} />
-      <Navbar />
-      <div>
-        {/* <Menu/> */}
-        <Outlet />
+      <div className="main-container">
+        <div className="detail-left-container">
+          <LeftMenu />
+        </div>
+        <div className="detail-right-container">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
