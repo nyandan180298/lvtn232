@@ -26,6 +26,7 @@ const AddNN: FC<INNhapModalProps> = ({
     _id: "",
     name: "",
     phoneNum: "",
+    kho: kho_id,
   });
 
   useEffect(() => {

@@ -37,7 +37,13 @@ const Wrapper = memo(() => {
     getNn();
   }, [getNn, rerender]);
 
-  return <Inner handleRerender={handleRerender} data={nn} khoId={id}/>;
+  return (
+    <Inner
+      handleRerender={handleRerender}
+      data={nn}
+      khoId={id}
+    />
+  );
 });
 Wrapper.displayName = "NguonNhap";
 

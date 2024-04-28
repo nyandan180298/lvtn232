@@ -21,19 +21,9 @@ class UserService extends ApiBase {
         return res;
     };
 
-    profile = username => {
-        const url = `${_USER_PATH}/get`;
-        return this.get(url, { params: { username } });
-    };
-
     me = () => {
         const url = `${_USER_PATH}/get_me`;
         return this.get(url);
-    };
-
-    update = requestBody => {
-        const url = `${_USER_PATH}/update/me`;
-        return this.put(url, requestBody);
     };
 
     update_password = requestBody => {
@@ -52,11 +42,6 @@ class UserService extends ApiBase {
         const url = `${_OAUTH_PATH}/password/reset`;
         const res = this.post(url, requestBody);
         return res;
-    };
-
-    check = () => {
-        const url = `${_OAUTH_PATH}/check`;
-        return this.post(url);
     };
 }
 

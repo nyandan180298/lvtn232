@@ -17,6 +17,16 @@ class NnService extends ApiBase {
     const url = `${_NN_PATH}/get/${id}`;
     return this.get(url);
   };
+
+  getAll = (requestBody, options) => {
+    const url = `${_NN_PATH}/getAll`;
+    return this.post(url, requestBody, options);
+  };
+
+  remove = (id) => {
+    const url = `${_NN_PATH}/delete/${id}`;
+    return this.delete(url);
+  };
 }
 
 // eslint-disable-next-line

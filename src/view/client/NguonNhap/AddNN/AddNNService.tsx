@@ -25,3 +25,8 @@ export const detailNNService = async (id: string) => {
     return {};
   }
 };
+
+export const deleteNNService = async (id: string) => {
+  const res = await nnService.remove(id);
+  return res;
+};

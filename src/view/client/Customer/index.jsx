@@ -39,8 +39,8 @@ const Wrapper = memo(() => {
 
   return <Inner handleRerender={handleRerender} data={nn} khoId={id}/>;
 });
-Wrapper.displayName = "NguonNhap";
+Wrapper.displayName = "Customer";
 
-const NguonNhap = Wrapper;
+const Customer = Wrapper;
 
-export default NguonNhap;
+export default Customer;

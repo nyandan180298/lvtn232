@@ -2,13 +2,20 @@ import { Button } from "antd";
 import Add from "assets/AddIcon";
 import { memo, useCallback, useState } from "react";
 import AddNN from "./AddNN";
-import { useParams } from "react-router-dom";
+import { Modal } from "antd";
+import { deleteNNService } from "./AddNN/AddNNService";
+import Message from "components/Message";
 
 const Inner = memo(({ data, handleRerender, khoId }) => {
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [eId, setEId] = useState("")
-  const param = useParams();
+  const [eId, setEId] = useState("");
+
+  const handleCloseConfirm = useCallback(() => {
+    handleRerender();
+    setConfirmModalVisible(false);
+  }, [handleRerender]);
 
   const handleCloseAdd = useCallback(() => {
     handleRerender();
@@ -19,6 +26,15 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
     handleRerender();
     setEditModalVisible(false);
   }, [handleRerender]);
+
+  const handleDelete = useCallback(() => {
+    deleteNNService(eId).then((res) => {
+      if (res.isSuccess) {
+        Message.sendSuccess("Xóa nguồn nhập thành công!");
+        window.location.reload();
+      } else Message.sendError(`thất bại: ${res.message}`);
+    });
+  }, [eId]);
 
   return (
     <div className="chon-kho-layout">
@@ -38,6 +54,7 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
               isModalVisible={addModalVisible}
               type="add"
               handleRerender={handleRerender}
+              kho_id={khoId}
             />
           )}
           {editModalVisible && (
@@ -46,9 +63,22 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
               isModalVisible={editModalVisible}
               type="edit"
               handleRerender={handleRerender}
-              kho_id={param.id}
+              kho_id={khoId}
               id={eId}
             />
+          )}
+          {confirmModalVisible && (
+            <Modal
+              title={"Xác nhận xóa kho"}
+              className="add-modal"
+              open={confirmModalVisible}
+              okText={"Xác nhận xóa"}
+              cancelText="Hủy"
+              onCancel={handleCloseConfirm}
+              onOk={handleDelete}
+              width={695}
+              centered
+            ></Modal>
           )}
         </div>
       </div>
@@ -60,7 +90,7 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
                 <div
                   className={"nn-row row_" + index}
                   onClick={() => {
-                    setEId(value._id)
+                    setEId(value._id);
                     setEditModalVisible(true);
                   }}
                 >
@@ -68,6 +98,17 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
                   <div className="nn-p-num">
                     Số điện thoại: {value?.phone_num}
                   </div>
+                </div>
+                <div className="delete-button-container">
+                  <Button
+                    className="delete-nn-button"
+                    onClick={() => {
+                      setEId(value._id);
+                      setConfirmModalVisible(true);
+                    }}
+                  >
+                    X
+                  </Button>
                 </div>
               </div>
             );
