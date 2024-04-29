@@ -5,8 +5,10 @@ import AddNN from "./AddNN";
 import { Modal } from "antd";
 import { deleteNNService } from "./AddNN/AddNNService";
 import Message from "components/Message";
+import Pagination from "components/Pagination";
+import { DEFAULT_PAGE_SIZE } from "utils/constants";
 
-const Inner = memo(({ data, handleRerender, khoId }) => {
+const Inner = memo(({ data, handleRerender, khoId, onPaginate, pageObj }) => {
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
@@ -86,11 +88,11 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
         {data &&
           data.map((value, index) => {
             return (
-              <div className="nn-container" key={value._id}>
+              <div className="nn-container" key={value.id}>
                 <div
                   className={"nn-row row_" + index}
                   onClick={() => {
-                    setEId(value._id);
+                    setEId(value.id);
                     setEditModalVisible(true);
                   }}
                 >
@@ -114,6 +116,14 @@ const Inner = memo(({ data, handleRerender, khoId }) => {
             );
           })}
       </div>
+      <Pagination
+        title={"Nguồn nhập"}
+        pageSize={DEFAULT_PAGE_SIZE}
+        totalRow={pageObj && pageObj.total}
+        currentPage={pageObj && pageObj.page}
+        totalPage={pageObj && pageObj.totalPage}
+        onPaginate={onPaginate}
+      />
     </div>
   );
 });
