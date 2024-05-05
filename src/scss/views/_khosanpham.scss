@@ -1,7 +1,7 @@
 .table-container {
-  height: 100vh;
-  margin: 15px;
+  margin: 24px;
   .ant-table {
+    position: unset;
     @include font-12;
     .ant-table-thead {
       .ant-table-cell {
@@ -9,6 +9,7 @@
       }
     }
     .ant-table-cell {
+      position: unset;
       padding: 12px;
     }
   }
@@ -54,6 +55,7 @@
   .search-button {
     padding: 0 8px 0 0;
     height: 16px;
+    position: unset;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     .search-icon {
       cursor: pointer;
     }

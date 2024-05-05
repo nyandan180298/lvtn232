@@ -34,7 +34,7 @@ const Wrapper = memo(() => {
                 <img
                     src={'home.jpg'}
                     alt="Homepage Background"
-                    height={900}
+                    height={700}
                 />
             </div>
         </div>

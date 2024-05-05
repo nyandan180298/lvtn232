@@ -1,43 +1,61 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import Inner from "./Inner";
-import khoService from "services/khoService";
-import { DEFAULT_URL } from "utils/constants";
-import { useParams } from "react-router-dom";
-
-const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
+import { useParams, useSearchParams } from "react-router-dom";
+import customerService from "services/customerService";
 
 const Wrapper = memo(() => {
-  const [rerender, setRerender] = useState(false);
-  const [nn, setNn] = useState([]);
-
   const { id } = useParams();
+  const [rerender, setRerender] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [customers, setCustomers] = useState([]);
+
+  const [pageObj, setPageObj] = useState({
+    page: 0,
+    total: 0,
+    totalPage: 0,
+  });
 
   const handleRerender = useCallback(() => {
     setRerender(!rerender);
   }, [rerender]);
 
-  const getNn = useCallback(async () => {
-    const kho = await khoService.detail(id);
-    const nn = kho.data.nguonNhaps;
-    const arr = await Promise.all(
-      nn.map(async (value) => {
-        const nguon_nhap = await fetch(`${_NN_URL}/get/${value}`);
-        const resNguon_nhap = await nguon_nhap.json();
-        return {
-          _id: resNguon_nhap.data._id,
-          name: resNguon_nhap.data.name,
-          phone_num: resNguon_nhap.data.phone_num,
-        };
-      })
-    );
-    if (arr) setNn(arr);
-  }, [id]);
+  const getCustomer = useCallback(async (body, options) => {
+    const param = { params: options };
+    const res = await customerService.getAll(body, param);
+    if (!res.data) {
+      setCustomers([]);
+    } else {
+      setCustomers(res.data.data);
+      setPageObj({
+        page: res.data.page,
+        total: res.data.total,
+        totalPage: res.data.totalPage,
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    getNn();
-  }, [getNn, rerender]);
+    const object = Object.fromEntries(searchParams.entries());
+    getCustomer({ khoid: id }, object);
+  }, [getCustomer, rerender, id, searchParams]);
 
-  return <Inner handleRerender={handleRerender} data={nn} khoId={id}/>;
+  const onPaginate = useCallback(
+    (page) => {
+      searchParams.set("page", page);
+      setSearchParams(searchParams);
+    },
+    [searchParams, setSearchParams]
+  );
+
+  return (
+    <Inner
+      handleRerender={handleRerender}
+      data={customers}
+      khoId={id}
+      onPaginate={onPaginate}
+      pageObj={pageObj}
+    />
+  );
 });
 Wrapper.displayName = "Customer";
 

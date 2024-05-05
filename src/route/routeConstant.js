@@ -7,9 +7,11 @@ const routeConstants = {
   LOGOUT: "/logout",
   MAIN: "/",
   KHOSANPHAM: "/kho",
-  NGUONNHAP: "/nguon-nhap/:id",
-  KHOSANPHAM_DETAIL: "/kho/:id",
-  CUSTOMER: "/khach-hang/:id",
+  NGUONNHAP: "/kho/:id/nguon-nhap",
+  KHOSANPHAM_DETAIL: "/kho/:id/san-pham",
+  CUSTOMER: "/kho/:id/khach-hang",
+  ORDER: "/kho/:id/don-hang",
+  NOTI: "/kho/:id/thong-bao",
 };
 
 export default routeConstants;

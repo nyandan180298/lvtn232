@@ -78,7 +78,7 @@ const Inner = memo(({ data, handleRerender, uid }) => {
                 <div
                   className="kho-pickem"
                   onClick={() => {
-                    navigate(`/kho/${value.id}`);
+                    navigate(`/kho/${value.id}/san-pham`);
                     navigate(0)
                   }}
                 >

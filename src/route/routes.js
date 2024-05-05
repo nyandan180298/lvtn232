@@ -92,6 +92,22 @@ const routes = [
                     loader: () => import('view/client/Customer'),
                 }),
             },
+            {
+                name: 'Order',
+                path: routeConstants.ORDER,
+                Component: Loadable({
+                    loading: LoadingScreen,
+                    loader: () => import('view/client/Order'),
+                }),
+            },
+            {
+                name: 'Noti',
+                path: routeConstants.NOTI,
+                Component: Loadable({
+                    loading: LoadingScreen,
+                    loader: () => import('view/client/Noti'),
+                }),
+            },
         ],
     },
 ];

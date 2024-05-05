@@ -1,7 +1,8 @@
 import axios from "axios";
+import { APP_URL } from "utils/constants";
 import { getAccessToken } from "utils/localStorage";
 const axiosClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: `${APP_URL}/#home`,
   timeout: 20000,
   headers: {
     "Content-Type": "application/json",

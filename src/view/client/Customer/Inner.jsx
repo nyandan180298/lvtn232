@@ -1,78 +1,100 @@
+import { memo, useCallback, useMemo, useState } from "react";
+import SearchBar from "../KhoSanPham/SearchBar/SearchBar";
+import Pagination from "components/Pagination";
+import { DEFAULT_PAGE_SIZE } from "utils/constants";
+import Table from "components/Table/Table";
 import { Button } from "antd";
-import Add from "assets/AddIcon";
-import { memo, useCallback, useState } from "react";
-import AddNN from "./AddNN";
-import { useParams } from "react-router-dom";
+import { ArrowsAltOutlined } from "@ant-design/icons";
+import DetailModal from "./DetailModal";
 
-const Inner = memo(({ data, handleRerender, khoId }) => {
-  const [addModalVisible, setAddModalVisible] = useState(false);
-  const [editModalVisible, setEditModalVisible] = useState(false);
-  const [eId, setEId] = useState("")
-  const param = useParams();
+const Inner = memo(({ data, handleRerender, khoId, pageObj, onPaginate }) => {
+  const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [detail, setDetail] = useState("");
+  const setKey = (text) => {
+    return text.id;
+  };
 
-  const handleCloseAdd = useCallback(() => {
+  const openDetailModelFormat = (_, text) => {
+    return (
+      <Button
+        className="edit-button"
+        onClick={() => {
+          setDetail(text);
+          setDetailModalVisible(true);
+        }}
+      >
+        <ArrowsAltOutlined style={{ color: "blue" }} />
+      </Button>
+    );
+  };
+
+  const columns = useMemo(
+    () => [
+      {
+        title: "",
+        dataIndex: "index",
+        key: "index",
+      },
+      {
+        title: "Tên khách hàng",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Số điện thoại",
+        dataIndex: "phoneNum",
+        key: "phoneNum",
+      },
+      {
+        title: "Số tiền tổng đã đặt",
+        dataIndex: "total",
+        key: "total",
+      },
+      {
+        title: "Cấp VIP",
+        dataIndex: "vip",
+        key: "vip",
+      },
+      {
+        title: "",
+        dataIndex: "",
+        key: "action",
+        render: openDetailModelFormat,
+      },
+    ],
+    []
+  );
+
+  const handleCloseModal = useCallback(() => {
     handleRerender();
-    setAddModalVisible(false);
-  }, [handleRerender]);
-
-  const handleCloseEdit = useCallback(() => {
-    handleRerender();
-    setEditModalVisible(false);
+    setDetailModalVisible(false);
   }, [handleRerender]);
 
   return (
     <div className="chon-kho-layout">
-      <div className="add-kho-container">
-        <div className="add-div">
-          <Button
-            className="add-button"
-            onClick={() => setAddModalVisible(true)}
-          >
-            <Add />
-            Thêm nguồn nhập
-          </Button>
-
-          {addModalVisible && (
-            <AddNN
-              onClose={handleCloseAdd}
-              isModalVisible={addModalVisible}
-              type="add"
-              handleRerender={handleRerender}
-            />
-          )}
-          {editModalVisible && (
-            <AddNN
-              onClose={handleCloseEdit}
-              isModalVisible={editModalVisible}
-              type="edit"
-              handleRerender={handleRerender}
-              kho_id={param.id}
-              id={eId}
-            />
-          )}
+      <div className="search-add-customer-bar">
+        <div className="search-div">
+          <SearchBar />
         </div>
       </div>
-      <div className="nn-big-container">
-        {data &&
-          data.map((value, index) => {
-            return (
-              <div className="nn-container" key={value._id}>
-                <div
-                  className={"nn-row row_" + index}
-                  onClick={() => {
-                    setEId(value._id)
-                    setEditModalVisible(true);
-                  }}
-                >
-                  <div className="nn-name">Tên: {value?.name}</div>
-                  <div className="nn-p-num">
-                    Số điện thoại: {value?.phone_num}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+      <div className="customer-big-container">
+        <Table columns={columns} data={data} rowKey={setKey} />
+        {detailModalVisible && (
+          <DetailModal
+            handleCloseModal={handleCloseModal}
+            detailModalVisible={detailModalVisible}
+            data={detail}
+          />
+        )}
       </div>
+      <Pagination
+        title={"Khách hàng"}
+        pageSize={DEFAULT_PAGE_SIZE}
+        totalRow={pageObj && pageObj.total}
+        currentPage={pageObj && pageObj.page}
+        totalPage={pageObj && pageObj.totalPage}
+        onPaginate={onPaginate}
+      />
     </div>
   );
 });

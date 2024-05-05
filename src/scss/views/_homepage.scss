@@ -8,14 +8,14 @@
 }
 .homepage-header {
   position: fixed;
-  background-color: $color--pallette_3;
+  z-index: 10;
   display: flex;
   height: 80px;
   width: 100%;
   justify-content: space-between;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: $color--header-button;
+  background-color: $color--pallette_2;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
@@ -63,25 +63,26 @@
   background-color: $color--button;
   color: $color--text-navbar;
 }
-.home-container {
-  padding-top: 100px;
-  height: 100vh;
-  display: flex;
-  background-color: $color--pallette_1;
-}
-
 .about-container {
   padding-top: 100px;
   height: 100vh;
   display: flex;
   background-color: $color--light;
 }
+.home-container {
+  padding-top: 100px;
+  height: 100vh;
+  display: flex;
+  background-color: $color--pallette_3;
+  text-wrap: pretty;
+  overflow: hidden;
+}
 .contact-container {
-  padding-top: 64px;
+  padding-top: 30px;
   height: fit-content;
   display: flex;
   background-color: $color--pallette_4;
-  padding-bottom: 64px;
+  padding-bottom: 30px;
 }
 .home-text-container {
   margin-left: 80px;
@@ -89,6 +90,7 @@
 }
 .home-background {
   align-self: flex-end;
+  height: 100vh;
 }
 
 .home-text-intro {

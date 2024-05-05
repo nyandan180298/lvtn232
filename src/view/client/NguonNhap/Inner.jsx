@@ -98,7 +98,7 @@ const Inner = memo(({ data, handleRerender, khoId, onPaginate, pageObj }) => {
                 >
                   <div className="nn-name">Tên: {value?.name}</div>
                   <div className="nn-p-num">
-                    Số điện thoại: {value?.phone_num}
+                    Số điện thoại: {value.phoneNum}
                   </div>
                 </div>
                 <div className="delete-button-container">

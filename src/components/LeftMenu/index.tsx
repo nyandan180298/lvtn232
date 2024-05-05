@@ -39,10 +39,10 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
             label: value.name,
             children: [
               {
-                key: "kho_" + value.id,
+                key: "san-pham_" + value.id,
                 label: value.id ? (
                   <div
-                    onClick={() => navigate(`/kho/${value.id}`)}
+                    onClick={() => navigate(`/kho/${value.id}/san-pham`)}
                     rel="nofollow "
                   >
                     Quản lý sản phẩm
@@ -55,7 +55,7 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
                 key: "nguon-nhap_" + value.id,
                 label: value.id ? (
                   <div
-                    onClick={() => navigate(`/nguon-nhap/${value.id}`)}
+                    onClick={() => navigate(`/kho/${value.id}/nguon-nhap`)}
                     rel="nofollow "
                   >
                     Quản lý nguồn nhập
@@ -68,7 +68,7 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
                 key: "don-hang_" + value.id,
                 label: value.id ? (
                   <div
-                    onClick={() => navigate(`/don-hang/${value.id}`)}
+                    onClick={() => navigate(`/kho/${value.id}/don-hang`)}
                     rel="nofollow "
                   >
                     Quản lý đơn hàng
@@ -81,7 +81,7 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
                 key: "khach-hang_" + value.id,
                 label: value.id ? (
                   <div
-                    onClick={() => navigate(`/khach-hang/${value.id}`)}
+                    onClick={() => navigate(`/kho/${value.id}/khach-hang`)}
                     rel="nofollow "
                   >
                     Quản lý khách hàng
@@ -94,7 +94,7 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
                 key: "thong-bao_" + value.id,
                 label: value.id ? (
                   <div
-                    onClick={() => navigate(`thong-bao/${value.id}`)}
+                    onClick={() => navigate(`/kho/${value.id}/thong-bao`)}
                     rel="nofollow "
                   >
                     Thông báo
@@ -115,12 +115,12 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
       defaultSelectedKeys={[
         "kho",
         "sub-kho_" + loc.split("/")[2],
-        loc.split("/")[1] + "_" + loc.split("/")[2],
+        loc.split("/")[3] + "_" + loc.split("/")[2],
       ]}
       defaultOpenKeys={[
         "kho",
         "sub-kho_" + loc.split("/")[2],
-        loc.split("/")[1] + "_" + loc.split("/")[2],
+        loc.split("/")[3] + "_" + loc.split("/")[2],
       ]}
       mode="inline"
       forceSubMenuRender={true}
