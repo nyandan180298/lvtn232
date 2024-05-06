@@ -23,6 +23,16 @@ class OrderService extends ApiBase {
     return this.post(url, requestBody);
   };
 
+  complete = (requestBody) => {
+    const url = `${_ORDER_PATH}/complete/${requestBody.id}`;
+    return this.post(url, requestBody);
+  };  
+
+  cancel = (requestBody) => {
+    const url = `${_ORDER_PATH}/cancel/${requestBody.id}`;
+    return this.post(url, requestBody);
+  };
+
   remove = (id) => {
     const url = `${_ORDER_PATH}/delete/${id}`;
     return this.delete(url);

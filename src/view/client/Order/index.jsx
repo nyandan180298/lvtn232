@@ -53,7 +53,7 @@ const Wrapper = memo(() => {
             ...value,
             products: products,
             customer: cus.data.name,
-            customer_pnum: cus.data.phoneNum,
+            phoneNum: cus.data.phoneNum,
           };
         })
       )

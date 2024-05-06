@@ -30,7 +30,7 @@
     background-color: $color--light;
     display: grid;
     flex-direction: column;
-    margin: 12px 0 12px 0;
+    margin: 8px 50px;
     padding: 8px;
     @include font-14;
     @include shadow;
@@ -79,10 +79,23 @@
     text-align: right;
   }
 }
-.orders-row{
+.orders-row {
   display: flex;
   justify-content: flex-end;
-  .expand-button{
+  .expand-button {
     width: 100px;
   }
+}
+.text-blue {
+  color: blue;
+}
+.complete-order-btn {
+  background-color: $color--complete-button;
+}
+
+.cancel-order-btn {
+  background-color: $color--delete-button;
+}
+.cancel-order-btn:hover {
+  background-color: $color--black;
 }

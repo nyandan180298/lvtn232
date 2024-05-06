@@ -10,7 +10,7 @@ import OrderDetailModal from "./OrderDetailModal";
 const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [detail, setDetail] = useState({});
-
+  
   const filterStatus = useCallback((number) => {
     if (number === 1) {
       return "Đang giao đơn";
@@ -42,6 +42,7 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
           detailModalVisible={detailModalVisible}
           filterStatus={filterStatus}
           data={detail}
+          handleRerender={handleRerender}
         />
       )}
       <div className="orders">
@@ -49,8 +50,8 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
           data.map((value, i) => {
             return (
               <div className="orders-form" key={i}>
-                <div className="orders-row-id_status">
-                  <div className="orders-id">Id đơn hàng: {value.id}</div>
+                <div className="orders-row-id_status ">
+                  <div className="orders-id text-blue">Id đơn hàng: {value.id}</div>
                   <div className="orders-status">
                     Trạng thái:{" "}
                     <span className="bold font_italic">
@@ -67,10 +68,10 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
                   </div>
                   <div className="orders-pnum">
                     SĐT:{" "}
-                    <span className="font_italic">{value.customer_pnum}</span>
+                    <span className="font_italic">{value.phoneNum}</span>
                   </div>
                 </div>
-                <div className="orders-row-total">
+                <div className="orders-row-total text-blue">
                   Tổng tiền: <span className="font_italic">{value.total}</span>
                 </div>
                 <div className="orders-row">
@@ -81,7 +82,7 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
                       setDetailModalVisible(true);
                     }}
                   >
-                    <ArrowsAltOutlined style={{ color: "blue" }} />
+                    <ArrowsAltOutlined style={{ color: "red" }} />
                   </Button>
                 </div>
               </div>

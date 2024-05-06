@@ -1,10 +1,16 @@
-import { FC, memo } from "react";
-import { Modal } from "antd";
+import { FC, memo, useCallback } from "react";
+import { Button, ConfigProvider, Modal } from "antd";
+import Message from "components/Message";
+import {
+  cancelOrderService,
+  completeOrderService,
+} from "../ConfirmOrderService";
 
 interface IDetailOrderModalProps {
   handleCloseModal: () => void;
   detailModalVisible: boolean;
   filterStatus: (value: number) => string;
+  handleRerender?: () => void;
   data: {
     id: string;
     status: number;
@@ -21,8 +27,29 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
   detailModalVisible,
   filterStatus,
   data,
+  handleRerender,
 }) => {
-  console.log(data);
+
+  const handleCompleteOrder = useCallback(() => {
+    completeOrderService(data).then((res) => {
+      if (res.isSuccess) {
+        Message.sendSuccess(`Hoàn thành Đơn hàng ${data.id} Thành công`);
+        handleRerender?.();
+        handleCloseModal();
+      } else Message.sendError(`Hoàn thành đơn hàng thất bại: ${res.message}`);
+    });
+  }, [data, handleCloseModal, handleRerender]);
+  
+  const handleCancelOrder = useCallback(() => {
+    cancelOrderService(data).then((res) => {
+      if (res.isSuccess) {
+        Message.sendSuccess(`Hủy đơn hàng ${data.id} Thành công`);
+        handleRerender?.();
+        handleCloseModal();
+      } else Message.sendError(`Hủy đơn hàng thất bại: ${res.message}`);
+    });
+  }, [data, handleCloseModal, handleRerender]);
+
   return (
     <Modal
       title={"Thông tin đơn hàng"}
@@ -30,9 +57,43 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
       open={detailModalVisible}
       cancelText="Hủy"
       onCancel={handleCloseModal}
-      onOk={handleCloseModal}
-      okText={"Hoàn thành đơn hàng"}
       width={695}
+      footer={[
+        <Button key="back" onClick={handleCloseModal}>
+          Trở về
+        </Button>,
+        data.status === 1 && (
+          <Button
+            className={"complete-order-btn"}
+            key="complete"
+            type="primary"
+            onClick={handleCompleteOrder}
+          >
+            Hoàn Thành Đơn Hàng
+          </Button>
+        ),
+        data.status === 1 && (
+          <ConfigProvider
+            key="cancel"
+            theme={{
+              components: {
+                Button: {
+                  colorPrimaryHover: `black`,
+                },
+              },
+            }}
+          >
+            <Button
+              className={"cancel-order-btn"}
+              key="cancel"
+              type="primary"
+              onClick={handleCancelOrder}
+            >
+              Hủy Đơn Hàng
+            </Button>
+          </ConfigProvider>
+        ),
+      ]}
       centered
     >
       <div className="detail-row">
@@ -41,7 +102,10 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
       </div>
       <div className="detail-row">
         <div className="detail-property bold">Trạng thái</div>
-        <div className="detail-value font_italic"> {filterStatus(data.status)}</div>
+        <div className="detail-value font_italic">
+          {" "}
+          {filterStatus(data.status)}
+        </div>
       </div>
       <div className="detail-row">
         <div className="detail-property bold">Tổng tiền</div>
@@ -53,7 +117,7 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
         </div>
         <div className="detail-value font_italic">
           <span className="bold">Số điện thoại: </span>
-          {data.customer_pnum}
+          {data.phoneNum}
         </div>
       </div>
       <div className="detail-row bold">

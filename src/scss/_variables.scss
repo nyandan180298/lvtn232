@@ -47,10 +47,14 @@ $color--arrow_available: #111111;
 
 $color--arrow_unavailable: #a6a6a6;
 
-$color--header-button: $color--pallette_4;
+$color--support-button: $color--pallette_4;
 
-$color--header-button-text: #fbf3d5;
+$color--logout-button: $color--pallette_4;
+
+$color--header-button-text: $color--light;
 
 $color--delete-button: #ff0000;
 
-$color--left_menu: $color--pallette_3;
+$color--complete-button: $color--pallette_4;
+
+$color--left_menu: $color--light;
