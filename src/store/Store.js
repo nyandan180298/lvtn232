@@ -12,7 +12,7 @@ const persistConfig = {
     key: 'root',
     storage,
     stateReconciler: autoMergeLevel2,
-    whitelist: ['setting', 'token','kho'],
+    whitelist: ['setting', 'token','kho','order'],
 };
 
 const persistedReducers = persistReducer(persistConfig, appReducer);

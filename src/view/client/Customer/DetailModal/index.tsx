@@ -18,6 +18,8 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
   detailModalVisible,
   data,
 }) => {
+  console.log(data)
+
   return (
     <Modal
       title={"Thông tin khách hàng"}
@@ -30,25 +32,37 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
       centered
     >
       <div className="detail-row">
-        <div className="detail-property">Tên</div>
-        <div className="detail-value"> {data.name}</div>
+        <div className="detail-property bold">Tên</div>
+        <div className="detail-value font_italic"> {data.name}</div>
       </div>
       <div className="detail-row">
-        <div className="detail-property">Số điện thoại</div>
-        <div className="detail-value"> {data.phoneNum}</div>
+        <div className="detail-property bold">Số điện thoại</div>
+        <div className="detail-value font_italic"> {data.phoneNum}</div>
       </div>
       <div className="detail-row">
-        <div className="detail-property">Số tiền đã đặt hàng</div>
-        <div className="detail-value"> {data.total}</div>
+        <div className="detail-property bold">Số tiền đã đặt hàng</div>
+        <div className="detail-value font_italic"> {data.total}</div>
       </div>
       <div className="detail-row">
-        <div className="detail-property">Cấp độ V.I.P</div>
-        <div className="detail-value"> {data.vip}</div>
+        <div className="detail-property bold">Cấp độ V.I.P</div>
+        <div className="detail-value font_italic"> {data.vip}</div>
       </div>
+      
       <div className="detail-row">
-        <div className="detail-property">Lịch sử đặt hàng</div>
-        <div className="detail-value"> {data.ordersHistory}</div>
+        <div className="detail-property bold">Lịch sử đặt hàng</div>
+        <div className="detail-value font_italic"> </div>
       </div>
+      {data.ordersHistory &&
+        data.ordersHistory.slice(0, 5).map((v, i) => {
+          return (
+            <div className="product-row" key={i}>
+              <div className="product-property font_italic">
+                id
+              </div>
+              <div className="product-value font_italic"> {v}</div>
+            </div>
+          );
+        })}
     </Modal>
   );
 };

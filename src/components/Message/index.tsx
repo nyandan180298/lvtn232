@@ -10,7 +10,8 @@ class Message {
         duration: number = defaultSuccessMessageDuration
     ) => {
         notification['success']({
-            message: message,
+            message: "Thành công",
+            description: message,
             duration: duration,
         });
     };
@@ -20,7 +21,8 @@ class Message {
         duration: number = defaultInfoMessageDuration
     ) => {
         notification['info']({
-            message: message,
+            message: "Thông báo",
+            description: message,
             duration: duration,
         });
     };
@@ -30,7 +32,8 @@ class Message {
         duration: number = defaultWarningMessageDuration
     ) => {
         notification['warning']({
-            message: message,
+            message: "Cảnh báo",
+            description: message,
             duration: duration,
         });
     };
@@ -40,7 +43,8 @@ class Message {
         duration: number = defaultErrorMessageDuration
     ) => {
         notification['error']({
-            message: message,
+            message: "Lỗi",
+            description: message,
             duration: duration,
         });
     };

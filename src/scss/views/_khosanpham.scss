@@ -56,9 +56,12 @@
   .search-button {
     padding: 0 8px 0 0;
     height: 16px;
-    position: unset;vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    position: unset;
     .search-icon {
       cursor: pointer;
     }
   }
+}
+.add-order-button{
+  border: none;
 }

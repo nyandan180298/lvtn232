@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
     "@reduxjs/toolkit": "^1.9.5",
