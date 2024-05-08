@@ -8,7 +8,6 @@ const FilterMenu = memo(({ categories, handleRerender }) => {
 
   const handleFilter = useCallback(
     (categoryId) => {
-      console.log(filtered, categoryId);
       if (!filtered || filtered !== categoryId) {
         searchParams.set("filter", categoryId);
       } else {
