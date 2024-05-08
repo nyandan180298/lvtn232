@@ -1,9 +1,11 @@
 import { FC, memo } from "react";
 import { Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface IDetailCustomerModalProps {
   handleCloseModal: () => void;
   detailModalVisible: boolean;
+  khoid: string;
   data: {
     name: string;
     phoneNum: string;
@@ -17,8 +19,9 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
   handleCloseModal,
   detailModalVisible,
   data,
+  khoid,
 }) => {
-  console.log(data)
+  const navigate = useNavigate();
 
   return (
     <Modal
@@ -47,7 +50,7 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
         <div className="detail-property bold">Cấp độ V.I.P</div>
         <div className="detail-value font_italic"> {data.vip}</div>
       </div>
-      
+
       <div className="detail-row">
         <div className="detail-property bold">Lịch sử đặt hàng</div>
         <div className="detail-value font_italic"> </div>
@@ -55,11 +58,17 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
       {data.ordersHistory &&
         data.ordersHistory.slice(0, 5).map((v, i) => {
           return (
-            <div className="product-row" key={i}>
-              <div className="product-property font_italic">
-                id
+            <div className="orders-history-row" key={i}>
+              <div className="orders-property font_italic">id</div>
+              <div
+                className="orders-value font_italic"
+                onClick={() => {
+                  navigate(`/kho/${khoid}/don-hang/?searchid=${v}`);
+                }}
+              >
+                {" "}
+                {v}
               </div>
-              <div className="product-value font_italic"> {v}</div>
             </div>
           );
         })}

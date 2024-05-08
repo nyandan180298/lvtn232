@@ -84,6 +84,7 @@ const Inner = memo(({ data, handleRerender, khoId, pageObj, onPaginate }) => {
             handleCloseModal={handleCloseModal}
             detailModalVisible={detailModalVisible}
             data={detail}
+            khoid={khoId}
           />
         )}
       </div>

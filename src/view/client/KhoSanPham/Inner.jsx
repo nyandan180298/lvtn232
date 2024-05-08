@@ -136,7 +136,7 @@ const Inner = memo(
           key: "name",
         },
         {
-          title: "Giá nhập",
+          title: "Giá bán",
           dataIndex: "price",
           key: "price",
         },

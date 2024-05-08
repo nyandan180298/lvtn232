@@ -62,6 +62,11 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
                 <div className="orders-row-date">
                   Ngày: {formatOrderDate(value.createdOn)}
                 </div>
+                <div className="orders-row-address">
+                  <div className="orders-address bold font_italic">
+                    Địa chỉ: {value.address}
+                  </div>
+                </div>
                 <div className="orders-row-customer">
                   <div className="orders-customer">
                     Tên khách hàng: {value.customer}

@@ -52,3 +52,20 @@
     }
   }
 }
+
+.orders-history-row {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $color--grey;
+  @include font-12;
+  .orders-property {
+    margin: 4px;
+    width: 100%;
+  }
+  .orders-value {
+    width: fit-content;
+    margin: 4px;
+    text-align: right;
+    cursor: pointer;
+  }
+}

@@ -6,6 +6,7 @@ import Message from "components/Message";
 import { addOrderService } from "./AddOrderService";
 import { useParams } from "react-router-dom";
 import productService from "services/productService";
+import { resetOrder } from "reducers/order/function";
 
 const regexPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
 
@@ -77,6 +78,7 @@ const CreateOrder: FC<IModalProps> = ({
       addOrderService(data, param.id || "").then((res) => {
         if (res.isSuccess) {
           Message.sendSuccess("Tạo đơn hàng thành công!");
+          resetOrder()
           handleRerender?.();
           onClose();
         } else Message.sendError(`Tạo đơn hàng thất bại: ${res.message}`);
