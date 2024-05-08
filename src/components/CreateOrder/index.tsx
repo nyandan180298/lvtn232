@@ -1,7 +1,7 @@
 import { FC, useState, useCallback, memo, useEffect } from "react";
 import CommonInput from "components/CommonInput";
 import { Input } from "enums/Input";
-import { Modal, Form } from "antd";
+import { Modal, Form, Button, ConfigProvider } from "antd";
 import Message from "components/Message";
 import { addOrderService } from "./AddOrderService";
 import { useParams } from "react-router-dom";
@@ -78,13 +78,19 @@ const CreateOrder: FC<IModalProps> = ({
       addOrderService(data, param.id || "").then((res) => {
         if (res.isSuccess) {
           Message.sendSuccess("Tạo đơn hàng thành công!");
-          resetOrder()
+          resetOrder();
           handleRerender?.();
           onClose();
         } else Message.sendError(`Tạo đơn hàng thất bại: ${res.message}`);
       });
     }
   }, [data, onClose, handleRerender, param.id]);
+
+  const handleRefresh = useCallback(() => {
+    resetOrder();
+    Message.sendSuccess("Làm mới đơn hàng thành công!");
+    onClose();
+  }, [onClose]);
 
   return (
     <Modal
@@ -96,6 +102,38 @@ const CreateOrder: FC<IModalProps> = ({
       onCancel={onClose}
       onOk={handleAddOrder}
       width={695}
+      footer={[
+        <Button key="back" onClick={onClose}>
+          Trở về
+        </Button>,
+        <Button
+          className={"complete-order-btn"}
+          key="complete"
+          type="primary"
+          onClick={handleAddOrder}
+        >
+          Tạo đơn hàng
+        </Button>,
+        <ConfigProvider
+          key="cancel"
+          theme={{
+            components: {
+              Button: {
+                colorPrimaryHover: `black`,
+              },
+            },
+          }}
+        >
+          <Button
+            className={"cancel-order-btn"}
+            key="cancel"
+            type="primary"
+            onClick={handleRefresh}
+          >
+            Làm mới đơn hàng
+          </Button>
+        </ConfigProvider>,
+      ]}
       centered
     >
       <Form className="add-edit-form">

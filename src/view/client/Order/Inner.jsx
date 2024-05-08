@@ -1,16 +1,36 @@
-import { Button } from "antd";
-import { memo, useCallback, useState } from "react";
+import { Button, ConfigProvider } from "antd";
+import { memo, useCallback, useEffect, useState } from "react";
 import SearchBar from "../KhoSanPham/SearchBar/SearchBar";
 import { DEFAULT_ORDER_SIZE } from "utils/constants";
 import Pagination from "components/Pagination";
 import dayjs from "dayjs";
 import { ArrowsAltOutlined } from "@ant-design/icons";
 import OrderDetailModal from "./OrderDetailModal";
+import { useSearchParams } from "react-router-dom";
 
 const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [detail, setDetail] = useState({});
-  
+  const [filtered, setFilterd] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.toString().split("=").includes("filter")) {
+      setFilterd(true);
+    }
+  }, [searchParams]);
+
+  const handleFiltered = useCallback(() => {
+    if (!filtered) {
+      searchParams.set("filter", 1);
+    } else {
+      searchParams.delete("filter");
+    }
+    setSearchParams(searchParams);
+    setFilterd(!filtered);
+    handleRerender();
+  }, [filtered, handleRerender, setSearchParams, searchParams]);
+
   const filterStatus = useCallback((number) => {
     if (number === 1) {
       return "Đang giao đơn";
@@ -35,6 +55,25 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
         <div className="search-div">
           <SearchBar />
         </div>
+        <div className="filter-div">
+          <ConfigProvider
+            key="cancel"
+            theme={{
+              components: {
+                Button: {
+                  colorPrimaryHover: `black`,
+                },
+              },
+            }}
+          >
+            <Button
+              className={"filter-order-button-" + filtered}
+              onClick={handleFiltered}
+            >
+              Đang giao hàng
+            </Button>
+          </ConfigProvider>
+        </div>
       </div>
       {detailModalVisible && (
         <OrderDetailModal
@@ -51,7 +90,9 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
             return (
               <div className="orders-form" key={i}>
                 <div className="orders-row-id_status ">
-                  <div className="orders-id text-blue">Id đơn hàng: {value.id}</div>
+                  <div className="orders-id text-blue">
+                    Id đơn hàng: {value.id}
+                  </div>
                   <div className="orders-status">
                     Trạng thái:{" "}
                     <span className="bold font_italic">
@@ -72,8 +113,7 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
                     Tên khách hàng: {value.customer}
                   </div>
                   <div className="orders-pnum">
-                    SĐT:{" "}
-                    <span className="font_italic">{value.phoneNum}</span>
+                    SĐT: <span className="font_italic">{value.phoneNum}</span>
                   </div>
                 </div>
                 <div className="orders-row-total text-blue">

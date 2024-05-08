@@ -15,6 +15,7 @@ import {
 } from "reducers/order/function";
 import Message from "components/Message";
 import { connect } from "react-redux";
+import FilterMenu from "./FilterMenu/FilterMenu";
 
 const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
 const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
@@ -90,7 +91,7 @@ const Inner = memo(
 
     const addOrderFormat = useCallback(
       (_, text) => {
-        return (orderState.includes(text.id)) ? (
+        return orderState.includes(text.id) ? (
           <Button
             className="add-order-button"
             onClick={() => {
@@ -182,6 +183,7 @@ const Inner = memo(
             <div className="search-div">
               <SearchBar />
             </div>
+
             <div className="add-div">
               <Button
                 className="add-button"
@@ -212,6 +214,12 @@ const Inner = memo(
                 pid={pid}
               />
             )}
+          </div>
+          <div className="filter-div">
+            <FilterMenu
+              categories={categories}
+              handleRerender={handleRerender}
+            />
           </div>
           <Table columns={columns} data={data} rowKey={setKey} />
         </div>

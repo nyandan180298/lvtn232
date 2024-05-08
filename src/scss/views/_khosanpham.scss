@@ -18,7 +18,7 @@
 .search-add-bar {
   display: flex;
   justify-items: center;
-  margin-bottom: 15px;
+
   height: 50px;
   .search-div {
     display: flex;
@@ -62,6 +62,18 @@
     }
   }
 }
-.add-order-button{
+.add-order-button {
   border: none;
+}
+.filter-tag {
+  padding: 6px;
+  margin: 6px;
+  margin-bottom: 15px;
+  height: fit-content;
+  border-radius: 16px;
+  @include font-12;
+}
+.filtered {
+  background-color: $color--filterd;
+  border-color: $color--grey;
 }

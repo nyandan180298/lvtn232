@@ -85,7 +85,7 @@
   .expand-button {
     width: 100px;
   }
-  &-address{
+  &-address {
     color: red;
   }
 }
@@ -101,4 +101,22 @@
 }
 .cancel-order-btn:hover {
   background-color: $color--black;
+}
+.filter-order-button-false {
+  @include font-14;
+  border-radius: 20px;
+  height: fit-content;
+}
+.filter-order-button-true {
+  @include font-14;
+  border-radius: 20px;
+  height: fit-content;
+  background-color: $color--filterd;
+  color: $color--black;
+  border-color: $color--grey;
+}
+.filter-div {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
 }

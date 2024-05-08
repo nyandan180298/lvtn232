@@ -18,6 +18,7 @@
       background-color: $color--light;
       color: $color--black;
       line-height: 36px;
+      border-radius: 18px;
       @include font-16;
       @include shadow;
     }
@@ -25,6 +26,7 @@
       background-color: $color--black;
       color: $color--light;
       border-color: $color--black;
+      border-radius: 18px;
     }
   }
   .nn-row {
