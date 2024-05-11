@@ -1,7 +1,6 @@
 .table-container {
   margin: 24px;
   .ant-table {
-    position: unset;
     @include font-12;
     .ant-table-thead {
       .ant-table-cell {

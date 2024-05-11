@@ -25,7 +25,7 @@ const Wrapper = memo(() => {
                 </div>
                 <Button
                     className="start-now-button"
-                    href='#about'
+                    href='#/login'
                 >
                     Bắt đầu ngay
                 </Button>

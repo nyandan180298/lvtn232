@@ -36,10 +36,14 @@ const Header: FC<IHeaderProps> = memo(({ sname, spos, order }) => {
     <div className="header">
       <div className="header-icon-container">
         <div className="header-logo" onClick={handleClickHome}>
-          Icon
+          <img
+            src={"webicon_remove_background.png"}
+            alt="Web Logo"
+            height={130}
+          ></img>
         </div>
         <div className="header-logo-text" onClick={handleClickHome}>
-          Smart Iventory
+          SMART INVENTORY
         </div>
       </div>
       <div className="header-middle-container">

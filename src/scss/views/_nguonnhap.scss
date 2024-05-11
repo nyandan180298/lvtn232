@@ -17,10 +17,10 @@
       height: 36px;
       background-color: $color--light;
       color: $color--black;
+      border: 1px solid;
       line-height: 36px;
       border-radius: 18px;
       @include font-16;
-      @include shadow;
     }
     .delete-nn-button:hover {
       background-color: $color--black;
@@ -39,7 +39,7 @@
     background-color: $color--light;
     height: fit-content;
 
-    border: 2px solid $color--black;
+    border: 1px solid $color--black;
     border-radius: 5px;
 
     .nn-p-num {
