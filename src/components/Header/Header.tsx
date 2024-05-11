@@ -54,7 +54,7 @@ const Header: FC<IHeaderProps> = memo(({ sname, spos, order }) => {
         <div className="header-order-displayer">
           Đơn hàng hiện tại: {products?.length}
         </div>
-        <div className="header-support-button"> Hỗ Trợ </div>
+        {/* <div className="header-support-button"> Hỗ Trợ </div> */}
         <div className="header-logout-button" onClick={handleClickLogout}>
           Đăng Xuất
         </div>

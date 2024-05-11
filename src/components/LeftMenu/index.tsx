@@ -90,19 +90,19 @@ const LeftMenu: FC<ILeftMenuProps> = memo(() => {
                   "Quản lý khách hàng"
                 ),
               },
-              // {
-              //   key: "thong-bao_" + value.id,
-              //   label: value.id ? (
-              //     <div
-              //       onClick={() => navigate(`/kho/${value.id}/thong-bao`)}
-              //       rel="nofollow "
-              //     >
-              //       Thông báo
-              //     </div>
-              //   ) : (
-              //     "Thông báo"
-              //   ),
-              // },
+              {
+                key: "thong-bao_" + value.id,
+                label: value.id ? (
+                  <div
+                    onClick={() => navigate(`/kho/${value.id}/thong-bao`)}
+                    rel="nofollow "
+                  >
+                    Thông báo
+                  </div>
+                ) : (
+                  "Thông báo"
+                ),
+              },
             ],
           };
         }),

@@ -1,0 +1,60 @@
+.notis {
+  display: flex;
+  flex-direction: column;
+  .notis-form {
+    background-color: $color--light;
+    display: grid;
+    flex-direction: column;
+    margin: 4px 50px;
+    padding: 8px;
+    @include font-12;
+    @include shadow;
+    .notis-row-id_status {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .notis-status {
+        width: fit-content;
+        align-self: flex-end;
+      }
+    }
+    .notis-row-message {
+      display: flex;
+      flex-direction: row;
+      margin: 4px 0;
+      justify-content: space-between;
+    }
+  }
+}
+.notis-row-no-message {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  justify-content: space-between;
+  .notis-no-message {
+    @include font-16;
+  }
+}
+.is_read_false:hover {
+  background-color: $color--collapse;
+  cursor: pointer;
+}
+.noti-bar {
+  display: flex;
+  justify-items: center;
+  margin-bottom: 15px;
+  height: 50px;
+  .unread-div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  .read-all-button {
+    @include font-14;
+    border-radius: 20px;
+    height: fit-content;
+    color: $color--black;
+    border-color: $color--grey;
+  }
+}

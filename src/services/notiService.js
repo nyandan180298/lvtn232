@@ -1,31 +1,20 @@
 import ApiBase from "modules/apis/apiBase";
 
-const _NOTI_PATH = "/noti";
+const _NOTI_PATH = "/notification";
 class NotiService extends ApiBase {
-  create = (requestBody) => {
-    const url = `${_NOTI_PATH}/create`;
-    const res = this.post(url, requestBody);
-    return res;
-  };
-
-  detail = (id) => {
-    const url = `${_NOTI_PATH}/get/${id}`;
-    return this.get(url);
-  };
-
   getAll = (requestBody, options) => {
     const url = `${_NOTI_PATH}/getAll`;
     return this.post(url, requestBody, options);
   };
 
-  update = (requestBody) => {
-    const url = `${_NOTI_PATH}/update/${requestBody.id}`;
+  read = (requestBody) => {
+    const url = `${_NOTI_PATH}/read/${requestBody.id}`;
     return this.post(url, requestBody);
   };
 
-  remove = (id) => {
-    const url = `${_NOTI_PATH}/delete/${id}`;
-    return this.delete(url);
+  readAll = (requestBody) => {
+    const url = `${_NOTI_PATH}/readAll/`;
+    return this.post(url, requestBody);
   };
 }
 

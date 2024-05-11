@@ -23,7 +23,7 @@ const FilterMenu = memo(({ categories, handleRerender }) => {
   return (
     <>
       {categories &&
-        categories.map((v) => {
+        categories.map((v,i) => {
           const classNameVar = v._id === filtered ? "filtered" : "";
           return (
             <Button
@@ -32,6 +32,7 @@ const FilterMenu = memo(({ categories, handleRerender }) => {
                 setFilterd(v._id);
                 handleFilter(v._id);
               }}
+              key={i}
             >
               {v.name}
             </Button>
