@@ -2,6 +2,7 @@ const routeConstants = {
   HOME: "/home",
   ABOUT: "/about",
   REGISTER: "/register",
+  CONFIRM_EMAIL: "/confirm-email/:uid",
   CONTACT: "/contact",
   LOGIN: "/login",
   LOGOUT: "/logout",

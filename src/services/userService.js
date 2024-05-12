@@ -16,7 +16,7 @@ class UserService extends ApiBase {
     };
 
     create = requestBody => {
-        const url = `${_USER_PATH}/create`;
+        const url = `${_USER_PATH}/register`;
         const res = this.post(url, requestBody);
         return res;
     };
@@ -40,6 +40,12 @@ class UserService extends ApiBase {
 
     reset_password = requestBody => {
         const url = `${_OAUTH_PATH}/password/reset`;
+        const res = this.post(url, requestBody);
+        return res;
+    };
+
+    confirm_email = requestBody => {
+        const url = `${_USER_PATH}/confirm-email/`;
         const res = this.post(url, requestBody);
         return res;
     };

@@ -5,20 +5,16 @@ import { useNavigate } from "react-router-dom";
 import TextInput from "components/CommonInput/TextInput";
 import PasswordInput from "components/CommonInput/PasswordInput";
 
-const errorMessages = {
-  WITHOUT_NUMBER_ERROR: "Field password must contain number",
-  WITHOUT_CHARACTER_ERROR: "Field password entirely numeric",
-  WRONG_INPUT_ERROR: "Your username or password is not correct!",
-  USERNAME_REQUIRED_ERROR: "Field username is required",
-  PASSWORD_REQUIRED_ERROR: "Field password is required",
-};
-
 const Inner = memo(({ handleRegister }) => {
   const [usernameEmpty, setUsernameEmpty] = useState();
   const [emailEmpty, setEmailEmpty] = useState();
   const [passwordEmpty, setPasswordEmpty] = useState();
+  const [firstNameEmpty, setFirstNameEmpty] = useState();
+  const [lastNameEmpty, setLastNameEmpty] = useState();
 
   const [username, setUsername] = useState();
+  const [firstname, setFirstName] = useState();
+  const [lastname, setLastName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
@@ -29,6 +25,22 @@ const Inner = memo(({ handleRegister }) => {
       setUsernameEmpty(false);
     } else {
       setUsernameEmpty(true);
+    }
+  }, []);
+
+  const handleBlurFirstName = useCallback((e) => {
+    if (e.target.value) {
+      setFirstNameEmpty(false);
+    } else {
+      setFirstNameEmpty(true);
+    }
+  }, []);
+
+  const handleBlurLastName = useCallback((e) => {
+    if (e.target.value) {
+      setLastNameEmpty(false);
+    } else {
+      setLastNameEmpty(true);
     }
   }, []);
 
@@ -54,31 +66,31 @@ const Inner = memo(({ handleRegister }) => {
       return;
     }
     handleRegister({
+      uid: username,
       username: username,
       password: password,
+      confirm_password: password,
       email: email,
+      first_name: firstname,
+      last_name: lastname,
     }).then((data) => {
       if (data.isSuccess) {
         Message.sendSuccess("Đăng ký thành công");
         navigate("/", { replace: true });
       } else {
-        if (
-          data.message === errorMessages.WITHOUT_CHARACTER_ERROR ||
-          data.message === errorMessages.WITHOUT_NUMBER_ERROR
-        ) {
-          Message.sendError("Mật khẩu phải chứa số và kí tự!");
-        } else if (data.message === errorMessages.WRONG_INPUT_ERROR) {
-          Message.sendError("Tên đăng nhập hoặc mật khẩu không chính xác!");
-        } else if (data.message === errorMessages.PASSWORD_REQUIRED_ERROR) {
-          Message.sendError("Vui lòng điền mật khẩu!");
-        } else if (data.message === errorMessages.USERNAME_REQUIRED_ERROR) {
-          Message.sendError("Vui lòng điền tên đăng nhập!");
-        } else {
-          Message.sendError(`Người dùng ${username} đã tồn tại!`);
-        }
+        Message.sendError(`${data.message}`);
       }
     });
-  }, [handleRegister, navigate, password, passwordCheck, username, email]);
+  }, [
+    handleRegister,
+    navigate,
+    password,
+    passwordCheck,
+    username,
+    email,
+    lastname,
+    firstname,
+  ]);
 
   useEffect(() => {
     var user = document.getElementById("username");
@@ -124,9 +136,45 @@ const Inner = memo(({ handleRegister }) => {
           />
           {usernameEmpty && (
             <div className="invalid-feedback">
-              <span>Please enter username</span>
+              <span>Vui lòng nhập username</span>
             </div>
           )}
+          <div className="login-semi-title">Họ và tên</div>
+          <div className="ho-ten-div">
+            <div className="ho-div">
+              <TextInput
+                className="register-text-input"
+                placeholder="Họ"
+                onBlur={handleBlurFirstName}
+                onChange={(e) => setFirstName(e)}
+                name="first_name"
+                required
+                id="first_name"
+              />
+              {firstNameEmpty && (
+                <div className="invalid-feedback">
+                  <span>Vui lòng nhập họ</span>
+                </div>
+              )}
+            </div>
+            <div className="ten-div">
+              <TextInput
+                className="register-text-input"
+                placeholder="Tên"
+                onBlur={handleBlurLastName}
+                onChange={(e) => setLastName(e)}
+                name="last_name"
+                required
+                id="last_name"
+              />
+              {lastNameEmpty && (
+                <div className="invalid-feedback">
+                  <span>Vui lòng nhập tên</span>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="login-semi-title">Mật khẩu</div>
           <PasswordInput
             className="password-input"
@@ -137,7 +185,7 @@ const Inner = memo(({ handleRegister }) => {
           />
           {passwordEmpty && (
             <div className="invalid-feedback">
-              <span>Please enter password</span>
+              <span>Vui lòng nhập password</span>
             </div>
           )}
           <div className="login-semi-title">Nhập lại Mật khẩu</div>
@@ -148,7 +196,7 @@ const Inner = memo(({ handleRegister }) => {
           />
           {passwordEmpty && (
             <div className="invalid-feedback">
-              <span>Please enter password</span>
+              <span>Vui lòng nhập password</span>
             </div>
           )}
           <div className="login-semi-title">Địa chỉ Email</div>
@@ -163,7 +211,7 @@ const Inner = memo(({ handleRegister }) => {
           />
           {emailEmpty && (
             <div className="invalid-feedback">
-              <span>Please enter email</span>
+              <span>Vui lòng nhập email</span>
             </div>
           )}
           <Button
@@ -180,11 +228,7 @@ const Inner = memo(({ handleRegister }) => {
         </div>
       </div>
       <div className="login-picture-container">
-        <img
-          src={"login-removebg.png"}
-          alt="Web Logo"
-          height={790}
-        />
+        <img src={"login-removebg.png"} alt="Web Logo" height={790} />
       </div>
     </div>
   );

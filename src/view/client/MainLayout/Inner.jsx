@@ -11,7 +11,6 @@ import Message from "components/Message";
 
 const Inner = memo((order) => {
   const [staffName, setStaffName] = useState("");
-  const [pos, setPos] = useState("");
   const [products, setProducts] = useState([]);
   const [rerender, setRerender] = useState(false);
   const [createModalVisible, setCreateModalVisible] = useState(false);
@@ -37,11 +36,6 @@ const Inner = memo((order) => {
     const res = await userService.me();
     const name = res.data?.firstName + " " + res.data?.lastName;
     setStaffName(name);
-    if (res.data?.isAdmin) {
-      setPos("Quản Lý");
-    } else if (!res.data?.isAdmin) {
-      setPos("Nhân Viên");
-    }
   }, []);
 
   useEffect(() => {
@@ -51,7 +45,7 @@ const Inner = memo((order) => {
 
   return (
     <div className="main-layout">
-      <Header sname={staffName} spos={pos} />
+      <Header sname={staffName} />
       <div className="main-container">
         <div className="detail-left-container">
           <LeftMenu />

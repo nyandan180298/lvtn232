@@ -44,6 +44,14 @@ const routes = [
         }),
     },
     {
+        name: 'ConfirmEmail',
+        path: routeConstants.CONFIRM_EMAIL,
+        Component: Loadable({
+            loading: LoadingScreen,
+            loader: () => import('view/ConfirmEmail'),
+        }),
+    },
+    {
         name: 'MainLayout',
         path: routeConstants.MAIN,
         Component: Loadable({

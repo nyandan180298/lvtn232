@@ -1,155 +1,161 @@
 .login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 .login-input-background {
-    display: flex;
-    height: 100%;
-    width: 50%;
-    background-color: #ffffff;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  width: 50%;
+  background-color: #ffffff;
+  align-items: center;
 }
 .login-title {
-    color: $color--black;
-    padding-bottom: 8px;
-    display: inline-flex;
-    margin-bottom: 20px;
-    font-family: $font-semibold, sans-serif;
-    font-size: 40px;
-    line-height: 52px;
+  color: $color--black;
+  padding-bottom: 8px;
+  display: inline-flex;
+  margin-bottom: 20px;
+  font-family: $font-semibold, sans-serif;
+  font-size: 40px;
+  line-height: 52px;
 }
 .register-title {
-    color: $color--black;
-    padding-bottom: 8px;
-    display: inline-flex;
-    font-family: $font-semibold, sans-serif;
-    @include font-24
+  color: $color--black;
+  padding-bottom: 8px;
+  display: inline-flex;
+  font-family: $font-semibold, sans-serif;
+  @include font-24;
 }
 .login-semi-title {
-    color: $color--black;
-    padding-bottom: 4px;
-    font-family: $font-semibold, sans-serif;
-    @include font-16;
+  color: $color--black;
+  padding-bottom: 4px;
+  font-family: $font-semibold, sans-serif;
+  @include font-16;
 }
 .login-input-container {
-    background-color: #ffffff;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    margin-left: 13%;
-    margin-right: 13%;
-    padding: 32px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: #ffffff;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 13%;
+  margin-right: 13%;
+  padding: 24px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .login-picture-container {
-    width: 47%;
-    margin-left: 3%;
+  width: 47%;
+  margin-left: 3%;
 }
 .username-input {
-    border-radius: 4px;
-    width: 100%;
-    background-color: $color--white-bg;
-    min-height: 40px;
-    margin-top: 12px;
-    @include font-14;
-    border: none;
-    padding: 10px 16px;
-    font-family: $font-regular, sans-serif;
+  border-radius: 4px;
+  width: 100%;
+  background-color: $color--white-bg;
+  min-height: 40px;
+  margin-top: 12px;
+  @include font-14;
+  border: none;
+  padding: 10px 16px;
+  font-family: $font-regular, sans-serif;
 }
-.register-text-input{
-    border-radius: 4px;
-    width: 100%;
-    background-color: $color--white-bg;
-    min-height: 40px;
-    margin-top: 12px;
-    @include font-14;
-    border: none;
-    padding: 10px 16px;
-    font-family: $font-regular, sans-serif;
+.register-text-input {
+  border-radius: 4px;
+  width: 100%;
+  background-color: $color--white-bg;
+  min-height: 40px;
+  @include font-14;
+  border: none;
+  padding: 10px 16px;
+  font-family: $font-regular, sans-serif;
 }
 .password-input {
+  border-radius: 4px;
+  width: 100%;
+  background-color: $color--white-bg;
+  min-height: 40px;
+  @include font-14;
+  border: none;
+  padding: 0;
+  > input.ant-input {
+    padding: 10px 40px 10px 16px;
+    background: $color--white-bg;
     border-radius: 4px;
-    width: 100%;
-    background-color: $color--white-bg;
-    min-height: 40px;
-    margin-top: 12px;
-    @include font-14;
-    border: none;
-    padding: 0;
-    > input.ant-input {
-        padding: 10px 40px 10px 16px;
-        background: $color--white-bg;
-        border-radius: 4px;
-        font-family: $font-regular, sans-serif;
-    }
-    .ant-input-suffix {
-        position: absolute;
-        top: 14px;
-        right: 8px;
-    }
+    font-family: $font-regular, sans-serif;
+  }
+  .ant-input-suffix {
+    position: absolute;
+    top: 14px;
+    right: 8px;
+  }
 }
 .login-button {
-    width: 100%;
-    height: 40px;
-    margin-top: 32px;
-    margin-bottom: 48px;
-    color: $color--light;
-    border-radius: 4px;
-    border: none;
-    background-color: $color--button-blue;
-    font-family: $font-medium, sans-serif;
+  width: 100%;
+  height: 40px;
+  margin-top: 32px;
+  margin-bottom: 48px;
+  color: $color--light;
+  border-radius: 4px;
+  border: none;
+  background-color: $color--button-blue;
+  font-family: $font-medium, sans-serif;
 }
-.return-button{
-    align-self: flex-end;
-    width: 35%;
-    height: 40px;
-    color: $color--light;
-    border-radius: 20px;
-    border: none;
-    background-color: $color--button-blue;
-    font-family: $font-medium, sans-serif;
+.return-button {
+  align-self: flex-end;
+  width: 35%;
+  height: 40px;
+  color: $color--light;
+  border-radius: 20px;
+  border: none;
+  background-color: $color--button-blue;
+  font-family: $font-medium, sans-serif;
 }
 .login-register {
-    text-decoration: 'none';
-    text-align: center;
-    @include font-16;
-    font-family: $font-regular, sans-serif;
-    margin-bottom: 20px;
+  text-decoration: "none";
+  text-align: center;
+  @include font-16;
+  font-family: $font-regular, sans-serif;
+  margin-bottom: 20px;
 }
 .register-link {
-    cursor: pointer;
-    margin-left: 8px;
-    @include font-16;
-    color: $color--button;
+  cursor: pointer;
+  margin-left: 8px;
+  @include font-16;
+  color: $color--button;
 }
 .forgot-password-link {
-    margin-left: auto;
-    @include font-16;
-    font-family: $font-medium, sans-serif;
-    color: $color--button;
+  margin-left: auto;
+  @include font-16;
+  font-family: $font-medium, sans-serif;
+  color: $color--button;
 }
 .invalid-feedback {
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
-    color: $color--red;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: $color--red;
 }
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .logo-register-container {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 40px;
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 40px;
 }
 .checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}
+.ho-ten-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .ho-div{
+    margin-right: 16px;
+  }
 }

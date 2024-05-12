@@ -9,7 +9,7 @@ interface IHeaderProps {
   order: any;
 }
 
-const Header: FC<IHeaderProps> = memo(({ sname, spos, order }) => {
+const Header: FC<IHeaderProps> = memo(({ sname, order }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
@@ -48,7 +48,6 @@ const Header: FC<IHeaderProps> = memo(({ sname, spos, order }) => {
       </div>
       <div className="header-middle-container">
         {sname && <div className="staff-name"> Tên tài khoản: {sname} </div>}
-        {spos && <div className="staff-position"> Chức vụ: {spos} </div>}
       </div>
       <div className="header-button-container">
         <div className="header-order-displayer">
