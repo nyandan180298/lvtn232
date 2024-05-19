@@ -7,6 +7,7 @@ const routeConstants = {
   LOGIN: "/login",
   LOGOUT: "/logout",
   MAIN: "/",
+  CUSTOMERKHO: "/:id",
   KHOSANPHAM: "/kho",
   NGUONNHAP: "/kho/:id/nguon-nhap",
   KHOSANPHAM_DETAIL: "/kho/:id/san-pham",

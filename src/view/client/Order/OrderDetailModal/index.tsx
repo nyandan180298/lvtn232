@@ -4,6 +4,7 @@ import Message from "components/Message";
 import {
   cancelOrderService,
   completeOrderService,
+  confirmOrderService,
 } from "../ConfirmOrderService";
 
 interface IDetailOrderModalProps {
@@ -11,6 +12,7 @@ interface IDetailOrderModalProps {
   detailModalVisible: boolean;
   filterStatus: (value: number) => string;
   handleRerender?: () => void;
+  filterConfirm: (value: boolean) => string;
   data: {
     id: string;
     status: number;
@@ -18,6 +20,7 @@ interface IDetailOrderModalProps {
     total: number;
     customer: string;
     customer_pnum: string;
+    isConfirm: boolean;
     products: { product_name: string; quantity: number }[];
   };
 }
@@ -26,10 +29,10 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
   handleCloseModal,
   detailModalVisible,
   filterStatus,
+  filterConfirm,
   data,
   handleRerender,
 }) => {
-
   const handleCompleteOrder = useCallback(() => {
     completeOrderService(data).then((res) => {
       if (res.isSuccess) {
@@ -39,7 +42,19 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
       } else Message.sendError(`Hoàn thành đơn hàng thất bại: ${res.message}`);
     });
   }, [data, handleCloseModal, handleRerender]);
-  
+
+  const handleConfirmOrder = useCallback(() => {
+    confirmOrderService(data).then((res) => {
+      if (res.isSuccess) {
+        Message.sendSuccess(
+          `Xác nhận Đơn hàng ${data.id} Thành công, hãy tiếp tục theo dõi đơn hàng`
+        );
+        handleRerender?.();
+        handleCloseModal();
+      } else Message.sendError(`Xác nhận đơn hàng thất bại: ${res.message}`);
+    });
+  }, [data, handleCloseModal, handleRerender]);
+
   const handleCancelOrder = useCallback(() => {
     cancelOrderService(data).then((res) => {
       if (res.isSuccess) {
@@ -62,7 +77,17 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
         <Button key="back" onClick={handleCloseModal}>
           Trở về
         </Button>,
-        data.status === 1 && (
+        !data.isConfirm && (
+          <Button
+            className={"complete-order-btn"}
+            key="complete"
+            type="primary"
+            onClick={handleConfirmOrder}
+          >
+            Xác Nhận Đơn Hàng
+          </Button>
+        ),
+        data.isConfirm && data.status === 1 && (
           <Button
             className={"complete-order-btn"}
             key="complete"
@@ -101,12 +126,21 @@ const OrderDetailModal: FC<IDetailOrderModalProps> = ({
         <div className="detail-value bold font_italic"> {data.id}</div>
       </div>
       <div className="detail-row">
-        <div className="detail-property bold">Trạng thái</div>
+        <div className="detail-property bold">Xác nhận đơn hàng</div>
         <div className="detail-value font_italic">
           {" "}
-          {filterStatus(data.status)}
+          {filterConfirm(data.isConfirm)}
         </div>
       </div>
+      {data.isConfirm && (
+        <div className="detail-row">
+          <div className="detail-property bold">Trạng thái</div>
+          <div className="detail-value font_italic">
+            {" "}
+            {filterStatus(data.status)}
+          </div>
+        </div>
+      )}
       <div className="detail-row">
         <div className="detail-property bold">Tổng tiền</div>
         <div className="detail-value font_italic"> {data.total}</div>

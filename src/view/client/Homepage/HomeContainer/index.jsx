@@ -4,7 +4,7 @@ import { memo } from 'react';
 
 const Wrapper = memo(() => {
     return (
-        <div id="home" className="about-container">
+        <div id="/home" className="about-container">
             <div className="home-text-container">
                 <div className="home-text-intro">
                     Phần mềm quản lý kho, hàng hóa cho cửa hàng và bán online

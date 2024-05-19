@@ -1,5 +1,4 @@
 import { Anchor, Button } from 'antd';
-import WebLogo from 'assets/icon/WebLogo';
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +7,11 @@ const Wrapper = memo(() => {
     return (
         <div className="homepage-header">
             <div className="header-logo">
-                <WebLogo />
+            <img
+            src={"webicon_remove_background.png"}
+            alt="Web Logo"
+            height={80}
+          ></img>
             </div>
             <div className="homepage-header-tabs-container">
                 <Anchor
@@ -17,12 +20,12 @@ const Wrapper = memo(() => {
                     items={[
                         {
                             key: 'home-anchor',
-                            href: '#home',
+                            href: '#/home',
                             title: 'Trang chủ',
                         },
                         {
                             key: 'about-anchor',
-                            href: '#about',
+                            href: '#/about',
                             title: 'Giới thiệu',
                         },
                         // {
@@ -32,7 +35,7 @@ const Wrapper = memo(() => {
                         // },
                         {
                             key: 'contact-anchor',
-                            href: '#contact',
+                            href: '#/contact',
                             title: 'Liên hệ',
                         },
                     ]}

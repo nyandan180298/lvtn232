@@ -28,6 +28,14 @@ const routes = [
         }),
     },
     {
+        name: 'CustomerKho',
+        path: routeConstants.CUSTOMERKHO,
+        Component: Loadable({
+            loading: LoadingScreen,
+            loader: () => import('view/customer/CustomerKho'),
+        }),
+    },
+    {
         name: 'Login',
         path: routeConstants.LOGIN,
         Component: Loadable({

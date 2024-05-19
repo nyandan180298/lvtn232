@@ -3,9 +3,9 @@ import { memo } from 'react';
 const Wrapper = memo(() => {
 
     return (
-        <div id="contact" className="contact-container">
+        <div id="/contact" className="contact-container">
             <div className="home-text-container">
-                <div className="home-text-intro">Liên hệ chúng tôi:</div>
+                <div className="contact-text-intro">Liên hệ chúng tôi:</div>
                 <div className="home-attr">
                     <div className="home-attr-text">
                         Email: smartInventoryBK@gmail.com

@@ -141,6 +141,7 @@ const Inner = memo(({ handleLogin }) => {
             <NavLink
               to={routeConstants.FORGOT_PASSWORD}
               className="forgot-password-link"
+              onClick={()=>{Message.sendInfo(`Work In Progress`)}}
             >
               Quên mật khẩu
             </NavLink>

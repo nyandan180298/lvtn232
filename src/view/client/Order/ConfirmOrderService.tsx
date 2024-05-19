@@ -10,6 +10,11 @@ export const completeOrderService = async (data: any) => {
   return res;
 };
 
+export const confirmOrderService = async (data: any) => {
+  const res = await orderService.confirm(data);
+  return res;
+};
+
 export const cancelOrderService = async (data: any) => {
   const res = await orderService.cancel(data);
   return res;

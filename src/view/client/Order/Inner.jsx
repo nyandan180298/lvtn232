@@ -12,11 +12,15 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
   const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [detail, setDetail] = useState({});
   const [filtered, setFilterd] = useState(false);
+  const [filteredConfirm, setFilterdConfirm] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (searchParams.toString().split("=").includes("filter")) {
       setFilterd(true);
+    }
+    if (searchParams.toString().split("=").includes("filter_confirm")) {
+      setFilterdConfirm(true);
     }
   }, [searchParams]);
 
@@ -31,6 +35,17 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
     handleRerender();
   }, [filtered, handleRerender, setSearchParams, searchParams]);
 
+  const handleFilteredConfirm = useCallback(() => {
+    if (!filteredConfirm) {
+      searchParams.set("filter_confirm", false);
+    } else {
+      searchParams.delete("filter_confirm");
+    }
+    setSearchParams(searchParams);
+    setFilterdConfirm(!filteredConfirm);
+    handleRerender();
+  }, [filteredConfirm, handleRerender, setSearchParams, searchParams]);
+
   const filterStatus = useCallback((number) => {
     if (number === 1) {
       return "Đang giao đơn";
@@ -38,6 +53,14 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
       return "Đơn hàng đã hoàn thành";
     } else if (number === 0) {
       return "Đơn hàng đã hủy";
+    }
+  }, []);
+
+  const filterConfirm = useCallback((confirm) => {
+    if (confirm === true) {
+      return "Đã xác nhận";
+    } else {
+      return "Chưa xác nhận";
     }
   }, []);
 
@@ -74,12 +97,32 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
             </Button>
           </ConfigProvider>
         </div>
+        <div className="filter-div">
+          <ConfigProvider
+            key="cancel"
+            theme={{
+              components: {
+                Button: {
+                  colorPrimaryHover: `black`,
+                },
+              },
+            }}
+          >
+            <Button
+              className={"filter-order-button-" + filteredConfirm}
+              onClick={handleFilteredConfirm}
+            >
+              Chưa xác nhận
+            </Button>
+          </ConfigProvider>
+        </div>
       </div>
       {detailModalVisible && (
         <OrderDetailModal
           handleCloseModal={handleCloseConfirm}
           detailModalVisible={detailModalVisible}
           filterStatus={filterStatus}
+          filterConfirm={filterConfirm}
           data={detail}
           handleRerender={handleRerender}
         />
@@ -100,8 +143,16 @@ const Inner = memo(({ data, onPaginate, pageObj, handleRerender, khoId }) => {
                     </span>
                   </div>
                 </div>
-                <div className="orders-row-date">
-                  Ngày: {formatOrderDate(value.createdOn)}
+                <div className="orders-row-id_status ">
+                  <div className="orders-row-date">
+                    Ngày: {formatOrderDate(value.createdOn)}
+                  </div>
+                  <div className="orders-status">
+                    Xác nhận đơn hàng:{" "}
+                    <span className="bold font_italic">
+                      {filterConfirm(value.isConfirm)}
+                    </span>
+                  </div>
                 </div>
                 <div className="orders-row-address">
                   <div className="orders-address bold font_italic">

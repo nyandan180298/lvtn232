@@ -70,7 +70,7 @@
   background-color: $color--light;
 }
 .home-container {
-  padding-top: 100px;
+  padding-top: 50px;
   height: 100vh;
   display: flex;
   background-color: $color--pallette_3;
@@ -78,7 +78,7 @@
   overflow: hidden;
 }
 .contact-container {
-  padding-top: 30px;
+  padding-top: 50px;
   height: fit-content;
   display: flex;
   background-color: $color--pallette_4;
@@ -97,7 +97,7 @@
   margin-top: 32px;
   color: #2952e2;
   font-family: $font-semibold, sans-serif;
-  font-size: 32px;
+  font-size: 34px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
@@ -106,10 +106,24 @@
 .about-text-intro {
   margin-top: 80px;
   margin-bottom: 50px;
-  color: $color--text_active;
+  width: fit-content;
+  padding: 10px;
+  color: $color--pallette_1;
   font-family: $font-semibold, sans-serif;
-  font-size: 32px;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 34px;
+  @include shadow;
+  background-color: $color--light_50;
+}
+.contact-text-intro {
+  margin-top: 80px;
+  margin-bottom: 50px;
+  width: fit-content;
+  padding: 10px;
+  color: $color--pallette_2;
+  font-family: $font-semibold, sans-serif;
+  font-size: 34px;
+  @include shadow;
+  background-color: $color--black_50;
 }
 
 .home-attr {

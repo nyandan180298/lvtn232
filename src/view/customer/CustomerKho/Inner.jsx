@@ -1,33 +1,40 @@
-import { EditOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import Table from "components/Table/Table";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import SearchBar from "./SearchBar/SearchBar";
 import Pagination from "components/Pagination";
 import { DEFAULT_PAGE_SIZE, DEFAULT_URL } from "utils/constants";
-import AddProduct from "components/AddProduct";
 import Add from "assets/AddIcon";
-import khoService from "services/khoService";
 import {
+  getOrder,
   removeOrderProduct,
   updateOrderProduct,
 } from "reducers/order/function";
 import Message from "components/Message";
 import { connect } from "react-redux";
-import FilterMenu from "./FilterMenu/FilterMenu";
+import SearchBar from "view/client/KhoSanPham/SearchBar/SearchBar";
+import FilterMenu from "view/client/KhoSanPham/FilterMenu/FilterMenu";
+import CustomerHeader from "./CustomerHeader";
+import CreateOrder from "components/CreateOrder";
 import dayjs from "dayjs";
 
 const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
-const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
 
 const Inner = memo(
   ({ data, onPaginate, pageObj, handleRerender, khoId, order }) => {
     const [addModalVisible, setAddModalVisible] = useState(false);
-    const [editModalVisible, setEditModalVisible] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [nn, setNn] = useState([]);
-    const [pid, setPid] = useState("");
+    const [products, setProducts] = useState([]);
     const [orderState, setOrderState] = useState([]);
+
+    const getProducts = useCallback(() => {
+      setProducts(getOrder());
+    }, []);
+
+    const handleClick = useCallback(() => {
+      if (products.length !== 0) setAddModalVisible(true);
+      else Message.sendInfo("Không có Sản phẩm nào được chọn trong đơn hàng");
+    }, [products]);
 
     const getCategories = useCallback(async () => {
       const ctg = await fetch(`${_DANH_MUC_URL}/getAll`);
@@ -35,59 +42,23 @@ const Inner = memo(
       if (resCtg) setCategories(resCtg.data);
     }, []);
 
-    const getNn = useCallback(async () => {
-      const kho = await khoService.detail(khoId);
-      const nn = kho.data.nguonNhaps;
-      const arr = await Promise.all(
-        nn.map(async (value) => {
-          const nguon_nhap = await fetch(`${_NN_URL}/get/${value}`);
-          const resNguon_nhap = await nguon_nhap.json();
-          return {
-            _id: resNguon_nhap.data._id,
-            name: resNguon_nhap.data.name,
-            phone_num: resNguon_nhap.data.phone_num,
-          };
-        })
-      );
-      if (arr) setNn(arr);
-    }, [khoId]);
-
     useEffect(() => {
+      getProducts();
       setOrderState(order.products);
-    }, [order]);
+    }, [order, getProducts]);
 
     useEffect(() => {
       getCategories();
-      getNn();
-    }, [getCategories, getNn]);
+    }, [getCategories]);
 
     const handleCloseAdd = useCallback(() => {
       handleRerender();
       setAddModalVisible(false);
     }, [handleRerender]);
 
-    const handleCloseEdit = useCallback(() => {
-      handleRerender();
-      setEditModalVisible(false);
-    }, [handleRerender]);
-
     const setKey = (text) => {
       return text.id;
     };
-
-    const editInfoFormat = useCallback((_, text) => {
-      return (
-        <Button
-          className="edit-button"
-          onClick={() => {
-            setPid(text.id);
-            setEditModalVisible(true);
-          }}
-        >
-          <EditOutlined style={{ color: "red" }} />
-        </Button>
-      );
-    }, []);
 
     const formatQuantity = useCallback((text) => {
       return text === 0 ? (
@@ -165,11 +136,6 @@ const Inner = memo(
           render: (quantity) => formatQuantity(quantity),
         },
         {
-          title: "Nguồn nhập",
-          dataIndex: "nguonNhap",
-          key: "nguonNhap",
-        },
-        {
           title: "Ngày nhập kho",
           dataIndex: "ngayNhap",
           key: "ngayNhap",
@@ -181,14 +147,8 @@ const Inner = memo(
           key: "hanSd",
           render: (date) => formatHanSd(date),
         },
-        {
-          title: "",
-          dataIndex: "",
-          key: "action",
-          render: editInfoFormat,
-        },
       ],
-      [addOrderFormat, editInfoFormat, formatQuantity]
+      [addOrderFormat, formatQuantity]
     );
 
     const formatNgayNhapHang = (text) => {
@@ -208,60 +168,52 @@ const Inner = memo(
     };
 
     return (
-      <div className="table-container">
-        <div>
-          <div className="search-add-bar">
-            <div className="search-div">
-              <SearchBar />
+      <div className="customer-kho-san-pham-container">
+        <CustomerHeader id={khoId} />
+        <div className="customer-main-container">
+          <div className="table-container">
+            <div>
+              <div className="search-add-bar">
+                <div className="search-div">
+                  <SearchBar />
+                </div>
+                <div className="header-order-displayer">
+                  Đơn hàng hiện tại: {products?.length}
+                </div>
+                <div className="add-div">
+                  <Button className="add-button" onClick={() => handleClick()}>
+                    <Add />
+                    Tạo đơn hàng
+                  </Button>
+                </div>
+                {addModalVisible && (
+                  <CreateOrder
+                    isModalVisible={addModalVisible}
+                    onClose={handleCloseAdd}
+                    handleRerender={handleRerender}
+                    products={products}
+                    isAdmin={"0"}
+                  />
+                )}
+              </div>
+              <div className="filter-div">
+                <FilterMenu
+                  categories={categories}
+                  handleRerender={handleRerender}
+                />
+              </div>
+              <Table columns={columns} data={data} rowKey={setKey} />
             </div>
-
-            <div className="add-div">
-              <Button
-                className="add-button"
-                onClick={() => setAddModalVisible(true)}
-              >
-                <Add />
-                Thêm Sản Phẩm
-              </Button>
-            </div>
-            {addModalVisible && (
-              <AddProduct
-                onClose={handleCloseAdd}
-                isModalVisible={addModalVisible}
-                type="add"
-                khoid={khoId}
-                categories={categories}
-                nNs={nn}
-              />
-            )}
-            {editModalVisible && (
-              <AddProduct
-                onClose={handleCloseEdit}
-                isModalVisible={editModalVisible}
-                type="edit"
-                khoid={khoId}
-                categories={categories}
-                nNs={nn}
-                pid={pid}
-              />
-            )}
-          </div>
-          <div className="filter-div">
-            <FilterMenu
-              categories={categories}
-              handleRerender={handleRerender}
+            <Pagination
+              title={"Sản Phẩm"}
+              pageSize={DEFAULT_PAGE_SIZE}
+              totalRow={pageObj && pageObj.total}
+              currentPage={pageObj && pageObj.page}
+              totalPage={pageObj && pageObj.totalPage}
+              onPaginate={onPaginate}
             />
           </div>
-          <Table columns={columns} data={data} rowKey={setKey} />
         </div>
-        <Pagination
-          title={"Sản Phẩm"}
-          pageSize={DEFAULT_PAGE_SIZE}
-          totalRow={pageObj && pageObj.total}
-          currentPage={pageObj && pageObj.page}
-          totalPage={pageObj && pageObj.totalPage}
-          onPaginate={onPaginate}
-        />
       </div>
     );
   }

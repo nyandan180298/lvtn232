@@ -61,6 +61,7 @@ const Inner = memo((order) => {
           onClose={onClose}
           handleRerender={handleRerender}
           products={products}
+          isAdmin={'1'}
         />
       )}
     </div>

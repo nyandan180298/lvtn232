@@ -15,6 +15,7 @@ interface IModalProps {
   isModalVisible: boolean;
   handleRerender?: () => void;
   products: string[];
+  isAdmin: string;
 }
 
 const CreateOrder: FC<IModalProps> = ({
@@ -22,6 +23,7 @@ const CreateOrder: FC<IModalProps> = ({
   isModalVisible,
   handleRerender,
   products,
+  isAdmin,
 }) => {
   const param = useParams();
   const [prodArr, setProdArr] = useState([
@@ -42,6 +44,7 @@ const CreateOrder: FC<IModalProps> = ({
         quantity: "0",
       },
     ],
+    is_admin: isAdmin,
   });
 
   const getProduct = useCallback(
