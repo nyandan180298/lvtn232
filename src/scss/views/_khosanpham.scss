@@ -76,3 +76,58 @@
   background-color: $color--filterd;
   border-color: $color--grey;
 }
+.views-switch {
+  display: flex;
+  flex-grow: 1;
+  align-self: flex-end;
+  margin-bottom: 15px;
+  justify-content: flex-end;
+}
+.view-button {
+  background-color: $color--light;
+  width: 16px;
+  padding: 6px;
+  margin-left: 6px;
+  border-radius: 10px;
+  @include shadow;
+}
+.view-button:hover {
+  background-color: $color--lightgrey;
+  cursor: pointer;
+}
+.view-button_active {
+  background-color: $color--active;
+  width: 16px;
+  padding: 6px;
+  margin-left: 6px;
+  border-radius: 10px;
+  @include shadow;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  .cards-grow {
+    width: 33%;
+  }
+  .cards {
+    width: 200px;
+    margin: 15px;
+    padding: 10px;
+    background-color: $color--light;
+    @include font-14;
+    @include shadow;
+    &-logo {
+      margin-left: 30px;
+    }
+    &-row {
+      display: flex;
+    }
+    &-value {
+      flex-grow: 1;
+      text-align: right;
+    }
+  }
+  .blank{
+    height: 32px;
+  }
+}

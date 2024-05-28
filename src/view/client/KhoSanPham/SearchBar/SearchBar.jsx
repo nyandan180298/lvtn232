@@ -23,7 +23,7 @@ const SearchBar= memo(
                 setSearchParams(searchParams);
                 return;
             }
-
+            searchParams.delete('searchid');
             searchParams.delete('page');
             if (keySearch) {
                 searchParams.set(keySearch, value);

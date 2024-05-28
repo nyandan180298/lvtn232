@@ -1,10 +1,16 @@
-import { EditOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  IdcardOutlined,
+  MinusOutlined,
+  PlusOutlined,
+  TableOutlined,
+} from "@ant-design/icons";
 import { Button } from "antd";
 import Table from "components/Table/Table";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import Pagination from "components/Pagination";
-import { DEFAULT_PAGE_SIZE, DEFAULT_URL } from "utils/constants";
+import { DEFAULT_PRODUCT_SIZE, DEFAULT_URL } from "utils/constants";
 import AddProduct from "components/AddProduct";
 import Add from "assets/AddIcon";
 import khoService from "services/khoService";
@@ -16,6 +22,7 @@ import Message from "components/Message";
 import { connect } from "react-redux";
 import FilterMenu from "./FilterMenu/FilterMenu";
 import dayjs from "dayjs";
+import CardContainer from "components/CardContainer/CardContainer";
 
 const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
 const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
@@ -28,6 +35,7 @@ const Inner = memo(
     const [nn, setNn] = useState([]);
     const [pid, setPid] = useState("");
     const [orderState, setOrderState] = useState([]);
+    const [viewTableState, setViewTableState] = useState(true);
 
     const getCategories = useCallback(async () => {
       const ctg = await fetch(`${_DANH_MUC_URL}/getAll`);
@@ -102,7 +110,7 @@ const Inner = memo(
         const expireDate = -Math.ceil(
           dayjs().diff(text.hanSd) / (1000 * 60 * 60 * 24)
         );
-        if (text.quantity !== 0 && expireDate > 0)
+        if (text.quantity !== 0 && expireDate > 0) {
           return orderState.includes(text.id) ? (
             <Button
               className="add-order-button"
@@ -126,6 +134,9 @@ const Inner = memo(
               <PlusOutlined style={{ color: "black" }} />
             </Button>
           );
+        } else {
+          return <div className="blank"></div>;
+        }
       },
       [orderState]
     );
@@ -251,12 +262,28 @@ const Inner = memo(
               categories={categories}
               handleRerender={handleRerender}
             />
+            <div className="views-switch">
+              <div
+                className={`view-button` + (viewTableState ? "_active" : "")}
+              >
+                <TableOutlined onClick={() => setViewTableState(true)} />
+              </div>
+              <div
+                className={`view-button` + (viewTableState ? "" : "_active")}
+              >
+                <IdcardOutlined onClick={() => setViewTableState(false)} />
+              </div>
+            </div>
           </div>
-          <Table columns={columns} data={data} rowKey={setKey} />
+          {viewTableState ? (
+            <Table columns={columns} data={data} rowKey={setKey} />
+          ) : (
+            <CardContainer data={data} addOrderFormat={addOrderFormat} />
+          )}
         </div>
         <Pagination
           title={"Sản Phẩm"}
-          pageSize={DEFAULT_PAGE_SIZE}
+          pageSize={DEFAULT_PRODUCT_SIZE}
           totalRow={pageObj && pageObj.total}
           currentPage={pageObj && pageObj.page}
           totalPage={pageObj && pageObj.totalPage}

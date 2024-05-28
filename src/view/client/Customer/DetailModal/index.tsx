@@ -64,6 +64,7 @@ const DetailModal: FC<IDetailCustomerModalProps> = ({
                 className="orders-value font_italic"
                 onClick={() => {
                   navigate(`/kho/${khoid}/don-hang/?searchid=${v}`);
+                  window.location.reload();
                 }}
               >
                 {" "}

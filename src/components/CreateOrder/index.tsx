@@ -82,12 +82,12 @@ const CreateOrder: FC<IModalProps> = ({
         if (res.isSuccess) {
           Message.sendSuccess("Tạo đơn hàng thành công!");
           resetOrder();
-          handleRerender?.();
+          window.location.reload();
           onClose();
         } else Message.sendError(`Tạo đơn hàng thất bại: ${res.message}`);
       });
     }
-  }, [data, onClose, handleRerender, param.id]);
+  }, [data, onClose, param.id]);
 
   const handleRefresh = useCallback(() => {
     resetOrder();

@@ -68,4 +68,7 @@
     text-align: right;
     cursor: pointer;
   }
+  .orders-value:hover {
+    color: $color--red;
+  }
 }

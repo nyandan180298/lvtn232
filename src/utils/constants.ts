@@ -1,5 +1,7 @@
 export const DATA_SEPARATOR = ',';
 
+export const DEFAULT_PRODUCT_SIZE = 9;
+
 export const DEFAULT_PAGE_SIZE = 8;
 
 export const DEFAULT_ORDER_SIZE = 5;

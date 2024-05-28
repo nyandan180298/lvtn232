@@ -18,6 +18,11 @@ const Wrapper = memo(() => {
     total: 0,
     totalPage: 0,
   });
+
+  const handleRerender = useCallback(() => {
+    setRerender(!rerender);
+  }, [rerender]);
+
   const onPaginate = useCallback(
     (page) => {
       searchParams.set("page", page);
@@ -30,26 +35,21 @@ const Wrapper = memo(() => {
     (body) => {
       readNotificationService(body).then((res) => {
         if (res.isSuccess) {
-          setRerender(!rerender);
-          Message.sendSuccess(`Thành công`);
+          Message.sendSuccess(`Đọc thành công`);
+          handleRerender();
         } else Message.sendError(`Thất bại: ${res.message}`);
       });
     },
-    [rerender]
+    [handleRerender]
   );
 
   const handleReadAllNoti = useCallback(() => {
     readAllNotificationService({ khoid: id }).then((res) => {
       if (res.isSuccess) {
-        setRerender(!rerender);
-        Message.sendSuccess(`Thành công`);
+        window.location.reload();
       } else Message.sendError(`Thất bại: ${res.message}`);
     });
-  }, [rerender, id]);
-
-  const handleRerender = useCallback(() => {
-    setRerender(!rerender);
-  }, [rerender]);
+  }, [id]);
 
   const getNoti = useCallback(async (body, options) => {
     const param = { params: options };
@@ -74,7 +74,7 @@ const Wrapper = memo(() => {
   useEffect(() => {
     const object = Object.fromEntries(searchParams.entries());
     getNoti({ khoid: id }, object);
-  }, [getNoti, rerender, id, searchParams]);
+  }, [getNoti, handleRerender, id, searchParams]);
 
   return (
     <Inner

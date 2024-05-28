@@ -20,6 +20,28 @@ interface IModalProps {
   handleRerender?: () => void;
 }
 
+// const props: UploadProps = {
+//   name: "file",
+//   multiple: false,
+//   headers: {
+//     authorization: "authorization-text",
+//     "Access-Control-Allow-Origin": "*",
+//   },
+//   maxCount: 1,
+//   action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+//   listType: "picture",
+//   onChange(info) {
+//     if (info.file.status !== "uploading") {
+//       console.log(info);
+//     }
+//     if (info.file.status === "done") {
+//       Message.sendSuccess(`${info.file.name} file uploaded successfully`);
+//     } else if (info.file.status === "error") {
+//       Message.sendError(`${info.file.name} file upload failed.`);
+//     }
+//   },
+// };
+
 const AddProduct: FC<IModalProps> = ({
   onClose,
   isModalVisible,
@@ -39,6 +61,7 @@ const AddProduct: FC<IModalProps> = ({
     hanSd: "",
     category: "",
     nguonNhap: "",
+    image: "",
     kho: khoid,
   });
 
@@ -197,7 +220,7 @@ const AddProduct: FC<IModalProps> = ({
                 }
                 placeholder="Thực phẩm"
                 className="input-item"
-                options={categories.map((value: any,index) => {
+                options={categories.map((value: any, index) => {
                   return {
                     key: index,
                     value: value._id,
@@ -220,7 +243,7 @@ const AddProduct: FC<IModalProps> = ({
                 }
                 placeholder="Nguồn Nhập"
                 className="input-item"
-                options={nNs.map((value: any,index) => {
+                options={nNs.map((value: any, index) => {
                   return {
                     key: index,
                     value: value._id,
@@ -230,6 +253,11 @@ const AddProduct: FC<IModalProps> = ({
               />
             </Form.Item>
           )}
+          {/* <Form.Item label="Hình ảnh" required>
+            <Upload {...props}>
+              <Button icon={<UploadOutlined />}>Upload</Button>
+            </Upload>
+          </Form.Item> */}
         </div>
       </Form>
     </Modal>
