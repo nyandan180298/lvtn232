@@ -1,13 +1,16 @@
 import { FC, useState, useCallback, memo, useEffect } from "react";
 import CommonInput from "components/CommonInput";
 import { Input } from "enums/Input";
-import { Modal, Form } from "antd";
+import { Modal, Form, UploadProps, Upload, Button } from "antd";
 import Message from "components/Message";
 import {
   addProductService,
+  deleteImageService,
   detailProductService,
   editProductService,
 } from "./AddProductService";
+import { DEFAULT_URL } from "utils/constants";
+import { UploadOutlined } from "@ant-design/icons";
 
 interface IModalProps {
   onClose: () => void;
@@ -20,27 +23,17 @@ interface IModalProps {
   handleRerender?: () => void;
 }
 
-// const props: UploadProps = {
-//   name: "file",
-//   multiple: false,
-//   headers: {
-//     authorization: "authorization-text",
-//     "Access-Control-Allow-Origin": "*",
-//   },
-//   maxCount: 1,
-//   action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-//   listType: "picture",
-//   onChange(info) {
-//     if (info.file.status !== "uploading") {
-//       console.log(info);
-//     }
-//     if (info.file.status === "done") {
-//       Message.sendSuccess(`${info.file.name} file uploaded successfully`);
-//     } else if (info.file.status === "error") {
-//       Message.sendError(`${info.file.name} file upload failed.`);
-//     }
-//   },
-// };
+const props: UploadProps = {
+  name: "file",
+  multiple: false,
+  headers: {
+    authorization: "authorization-text",
+    "Access-Control-Allow-Origin": "*",
+  },
+  maxCount: 1,
+  action: `${DEFAULT_URL}/image/upload`,
+  listType: "picture",
+};
 
 const AddProduct: FC<IModalProps> = ({
   onClose,
@@ -61,8 +54,11 @@ const AddProduct: FC<IModalProps> = ({
     hanSd: "",
     category: "",
     nguonNhap: "",
-    image: "",
     kho: khoid,
+    image: {
+      name: "",
+      path: "",
+    },
   });
 
   useEffect(() => {
@@ -73,6 +69,14 @@ const AddProduct: FC<IModalProps> = ({
         });
       });
   }, [pid]);
+
+  const removeFile = useCallback((fp: string) => {
+    deleteImageService(fp).then((res) => {
+      if (res.isSuccess) {
+        Message.sendSuccess("Xóa hình thành công!");
+      } else Message.sendError(`Thất bại: ${res.message}`);
+    });
+  }, []);
 
   const handleAddProduct = useCallback(() => {
     if (!data.pId.trim()) Message.sendError("Vui lòng nhập mã sản phẩm");
@@ -253,11 +257,37 @@ const AddProduct: FC<IModalProps> = ({
               />
             </Form.Item>
           )}
-          {/* <Form.Item label="Hình ảnh" required>
-            <Upload {...props}>
-              <Button icon={<UploadOutlined />}>Upload</Button>
+          <Form.Item label="Hình ảnh" required>
+            <Upload
+              {...props}
+              onChange={(info) => {
+                if (info.file.status !== "uploading") {
+                }
+                if (info.file.status === "done") {
+                  setData({
+                    ...data,
+                    image: {
+                      name: info.file.name,
+                      path: info.file.response.data.filepath,
+                    },
+                  });
+                  Message.sendSuccess(
+                    `${info.file.name} file uploaded successfully`
+                  );
+                } else if (info.file.status === "error") {
+                  Message.sendError(`${info.file.name} file upload failed.`);
+                }
+              }}
+              onRemove={(info) => {
+                const fp = info.response.data.filepath.split("\\")[2];
+                if (info) {
+                  removeFile(fp);
+                }
+              }}
+            >
+              <Button icon={<UploadOutlined />}>Chọn ảnh</Button>
             </Upload>
-          </Form.Item> */}
+          </Form.Item>
         </div>
       </Form>
     </Modal>

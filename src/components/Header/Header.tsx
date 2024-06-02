@@ -1,7 +1,9 @@
 import { FC, memo, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getOrder } from "reducers/order/function";
 import { connect } from "react-redux";
+import notiService from "services/notiService";
+import { BellOutlined } from "@ant-design/icons";
 
 interface IHeaderProps {
   sname: string;
@@ -11,7 +13,22 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = memo(({ sname, order }) => {
   const navigate = useNavigate();
+  const params = useParams();
   const [products, setProducts] = useState([]);
+  const [data, setData] = useState(0);
+
+  const getUnreadNoti = useCallback(async (body: any) => {
+    const res = await notiService.getUnread(body);
+    if (!res.data) {
+      setData(0);
+    } else {
+      setData(res.data.total);
+    }
+  }, []);
+
+  useEffect(() => {
+    getUnreadNoti({ khoid: params.id });
+  }, [getUnreadNoti, params.id]);
 
   const getProductOrder = useCallback(() => {
     const result = getOrder();
@@ -53,7 +70,16 @@ const Header: FC<IHeaderProps> = memo(({ sname, order }) => {
         <div className="header-order-displayer">
           Đơn hàng hiện tại: {products?.length}
         </div>
-        {/* <div className="header-support-button"> Hỗ Trợ </div> */}
+        <div className="noti-container">
+          <BellOutlined
+            className="bell"
+            onClick={() => {
+              navigate(`/kho/${params.id}/thong-bao`);
+              window.location.reload();
+            }}
+          />
+          <div className="noti-number">{data}</div>
+        </div>
         <div className="header-logout-button" onClick={handleClickLogout}>
           Đăng Xuất
         </div>

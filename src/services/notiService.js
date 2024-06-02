@@ -7,6 +7,11 @@ class NotiService extends ApiBase {
     return this.post(url, requestBody, options);
   };
 
+  getUnread = (requestBody, options) => {
+    const url = `${_NOTI_PATH}/getUnread`;
+    return this.post(url, requestBody, options);
+  };
+
   read = (requestBody) => {
     const url = `${_NOTI_PATH}/read/${requestBody.id}`;
     return this.post(url, requestBody);

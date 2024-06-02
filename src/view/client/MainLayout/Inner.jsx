@@ -45,7 +45,7 @@ const Inner = memo((order) => {
 
   return (
     <div className="main-layout">
-      <Header sname={staffName} />
+      <Header sname={staffName}/>
       <div className="main-container">
         <div className="detail-left-container">
           <LeftMenu />

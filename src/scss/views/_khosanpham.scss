@@ -110,14 +110,15 @@
     width: 33%;
   }
   .cards {
-    width: 200px;
+    width: 250px;
     margin: 15px;
     padding: 10px;
     background-color: $color--light;
     @include font-14;
     @include shadow;
     &-logo {
-      margin-left: 30px;
+      display: grid;
+      place-items: center;
     }
     &-row {
       display: flex;
@@ -127,7 +128,21 @@
       text-align: right;
     }
   }
-  .blank{
+  .blank {
     height: 32px;
   }
+}
+.link-customer {
+  color: $color--black;
+  text-decoration: none;
+  padding: 8px;
+  margin-left: 30px;
+  @include font-14;
+  @include shadow;
+  background-color: $color--light;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.link-customer:hover {
+  color: $color--button-blue;
 }

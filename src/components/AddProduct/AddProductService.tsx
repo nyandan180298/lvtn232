@@ -1,3 +1,4 @@
+import imageService from "services/imageService";
 import productService from "services/productService";
 
 export const addProductService = async (data: any, khoid: string) => {
@@ -24,3 +25,8 @@ export const detailProductService = async (pid: string) => {
     return {};
   }
 };
+
+export const deleteImageService = async (fp: string) => {
+  const res = await imageService.remove(fp)
+  return res
+}

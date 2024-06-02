@@ -4,13 +4,14 @@ import {
   MinusOutlined,
   PlusOutlined,
   TableOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
 import Table from "components/Table/Table";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import Pagination from "components/Pagination";
-import { DEFAULT_PRODUCT_SIZE, DEFAULT_URL } from "utils/constants";
+import { APP_URL, DEFAULT_PRODUCT_SIZE, DEFAULT_URL } from "utils/constants";
 import AddProduct from "components/AddProduct";
 import Add from "assets/AddIcon";
 import khoService from "services/khoService";
@@ -224,8 +225,10 @@ const Inner = memo(
           <div className="search-add-bar">
             <div className="search-div">
               <SearchBar />
+              <a className="link-customer" href={`${APP_URL}/#/${khoId}`}>
+                Link <UserOutlined />
+              </a>
             </div>
-
             <div className="add-div">
               <Button
                 className="add-button"

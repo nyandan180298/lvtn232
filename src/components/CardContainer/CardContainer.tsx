@@ -8,6 +8,10 @@ interface ICardContainerProps {
     price: number;
     quantity: number;
     hanSd: string;
+    image: {
+      name: string;
+      path: string;
+    };
   }[];
   addOrderFormat: (_: any, text: any) => React.ReactNode;
 }
@@ -31,15 +35,26 @@ const CardContainer: FC<ICardContainerProps> = memo(
       <div className="cards-container">
         {data &&
           data.map((v, i) => {
+            let fp;
+            if (v.image) fp = v.image.path.split("\\")[2];
             return (
               <div className="cards-grow" key={i}>
                 <div className="cards">
                   <div className="cards-logo">
-                    <img
-                      src={"default-product-image.png"}
-                      alt="Web Logo"
-                      height={140}
-                    ></img>
+                    {!v.image && (
+                      <img
+                        src={"default-product-image.png"}
+                        alt="Default Product Logo"
+                        height={140}
+                      ></img>
+                    )}
+                    {v.image && (
+                      <img
+                        src={`http://localhost:3001/image/use/${fp}`}
+                        alt={`${v.image.name}`}
+                        height={140}
+                      ></img>
+                    )}
                   </div>
                   <div className="cards-property">{v.name}</div>
                   <div className="cards-value">{v.category}</div>

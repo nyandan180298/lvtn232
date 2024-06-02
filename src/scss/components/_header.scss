@@ -65,21 +65,28 @@
     justify-items: center;
     padding: 8px;
   }
-  &-support-button {
-    @include font-18;
-    overflow: hidden;
-    padding: 12px;
-    align-content: flex-end;
-    cursor: pointer;
-    margin: auto;
-    margin-left: 16px;
-    margin-right: 8px;
-    background-color: $color--support-button;
-    color: $color--header-button-text;
-    border-radius: 10px;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  .noti-container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    margin-right: 15px;
+    .noti-number {
+      position: absolute;
+      top: 30px;
+      left: 16px;
+      padding: 0 5px;
+      font-size: 12px;
+      line-height: 22px;
+      height: 22px;
+      background: red;
+      color: #fff;
+      border-radius: 11px;
+      white-space: nowrap;
+    }
+    .bell:hover {
+      cursor: pointer;
+      color: $color--text_active;
+    }
   }
   &-logout-button {
     @include font-18;
@@ -97,7 +104,7 @@
       rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   }
 }
-.header-order-displayer{
+.header-order-displayer {
   @include font-16;
   padding: 12px;
   margin: auto;
