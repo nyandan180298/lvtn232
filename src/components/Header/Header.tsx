@@ -78,7 +78,7 @@ const Header: FC<IHeaderProps> = memo(({ sname, order }) => {
               window.location.reload();
             }}
           />
-          <div className="noti-number">{data}</div>
+          {data !== 0 && <div className="noti-number">{data}</div>}
         </div>
         <div className="header-logout-button" onClick={handleClickLogout}>
           Đăng Xuất
