@@ -11,7 +11,7 @@ import Table from "components/Table/Table";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import SearchBar from "./SearchBar/SearchBar";
 import Pagination from "components/Pagination";
-import { APP_URL, DEFAULT_PRODUCT_SIZE, DEFAULT_URL } from "utils/constants";
+import { DEFAULT_PRODUCT_SIZE, DEFAULT_URL } from "utils/constants";
 import AddProduct from "components/AddProduct";
 import Add from "assets/AddIcon";
 import khoService from "services/khoService";
@@ -27,6 +27,7 @@ import CardContainer from "components/CardContainer/CardContainer";
 
 const _DANH_MUC_URL = `${DEFAULT_URL}/category`;
 const _NN_URL = `${DEFAULT_URL}/nguon-nhap`;
+const _URL = "https://lvtn-2024.web.app/"
 
 const Inner = memo(
   ({ data, onPaginate, pageObj, handleRerender, khoId, order }) => {
@@ -225,7 +226,7 @@ const Inner = memo(
           <div className="search-add-bar">
             <div className="search-div">
               <SearchBar />
-              <a className="link-customer" href={`${APP_URL}/#/${khoId}`}>
+              <a className="link-customer" href={`${_URL}/#/${khoId}`}>
                 Link <UserOutlined />
               </a>
             </div>

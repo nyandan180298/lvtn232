@@ -20,16 +20,15 @@
   .detail-left-container {
     position: fixed;
     background-color: $color--left_menu;
-    z-index: 10;
+    z-index: 9;
     display: flex;
     width: 330px;
     flex-direction: column;
     font-weight: 500;
     transition: width 0.4s;
     height: 100%;
-    border-top: 2px solid;
-    border-right: 2px solid;
-    border-radius: 10px;
+    border-right: 1px solid;
+    border-color: $color--black_50;
     .ant-menu {
       border-radius: 12px;
       background-color: $color--left_menu;
@@ -148,6 +147,6 @@
   }
 }
 
-.red{
+.red {
   color: red;
 }

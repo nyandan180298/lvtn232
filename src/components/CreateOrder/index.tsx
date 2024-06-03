@@ -31,6 +31,10 @@ const CreateOrder: FC<IModalProps> = ({
       name: "",
       id: "",
       quantity: "",
+      image: {
+        name: "",
+        path: "",
+      },
     },
   ]);
   const [data, setData] = useState({
@@ -89,6 +93,7 @@ const CreateOrder: FC<IModalProps> = ({
     }
   }, [data, onClose, param.id]);
 
+  console.log(prodArr);
   const handleRefresh = useCallback(() => {
     resetOrder();
     Message.sendSuccess("Làm mới đơn hàng thành công!");
@@ -185,12 +190,19 @@ const CreateOrder: FC<IModalProps> = ({
           </Form.Item>
           {prodArr.map((v, i) => {
             const detailIndex = i;
-
+            let fp;
+            if (v.image) fp = v.image.path.split("\\")[2];
             return (
               <div className="products-input" key={i}>
                 <div className="product-name">
                   {" "}
                   Tên sản phẩm: {v.name} | Số Lượng {v.quantity}
+                  <img
+                    src={`http://localhost:3001/image/use/${fp}`}
+                    alt={`${v.image.name}`}
+                    height={50}
+                    className="product-image"
+                  ></img>
                 </div>
                 <Form.Item label="Số Lượng" required>
                   <CommonInput
